@@ -8,6 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,7 +20,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 
-public class Login extends ActionBarActivity implements View.OnClickListener, TextToSpeech.OnInitListener {
+public class Login extends AppCompatActivity implements View.OnClickListener, TextToSpeech.OnInitListener {
 
     private EditText usernametext;
     private EditText passwordtext;
