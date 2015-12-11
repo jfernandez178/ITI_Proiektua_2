@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">LearnUkulele</string>
+    <string name="action_settings">Settings</string>
+    <string name="main_title">Learn to Play Ukulele : </string>
+    <string name="main_chords">MAIN UKULELE CHORDS </string>
+    <string name="main_wikipedia">UKULELE INFORMATION </string>
+    <string name="main_learn">LEARN SONGS </string>
+    <string name="title_activity_chords">ChordsActivity</string>
+    <string name="common_chords">Ukulele chords:</string>
+    <string name="title_activity_wiki">WikiActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_songs">SongsActivity</string>
+    <string name="list_songs">PLAYLIST</string>
+    <string name="title_activity_learn_song">LearnSongActivity</string>
+    <string name="firstC"></string>
+    <string name="learn_song">Selected SONG:</string>
+    <string name="button_MP3">PLAY SONG</string>
+    <string name="button_YOUTUBE">YOUTUBE</string>
+
+    <string name="botonlogin">Login</string>
+    <string name="botonRegistrar">Registrar</string>
+    <string name="gaizkiLogeatuDa">Erabiltzaile-izen edo pasahitz desegokiak</string>
+
+
+</resources>
