@@ -24,6 +24,8 @@
     <string name="gaizkiLogeatuDa">Erabiltzaile-izen edo pasahitz desegokiak</string>
 
     <string name="home">Bienvenido</string>
+    <string name="drawer_open">Zabalik</string>
+    <string name="drawer_close">Itxita</string>
 
 
 </resources>

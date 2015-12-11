@@ -6,8 +6,14 @@
             android:id="@+id/drawer_home"
             android:title="@string/home"/>
         <item
-            android:id="@+id/drawer_home_2"
-            android:title="@string/home"/>
+            android:id="@+id/drawer_main_chords"
+            android:title="@string/main_chords"/>
+        <item
+            android:id="@+id/drawer_main_wikipedia"
+            android:title="@string/main_wikipedia"/>
+        <item
+            android:id="@+id/drawer_main_learn"
+            android:title="@string/main_learn"/>
     </group>
 
 </menu>
