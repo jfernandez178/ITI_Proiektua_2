@@ -1,6 +1,7 @@
 package com.example.javier.ukelelearrospi;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +23,22 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Navigation drawerra polita jarri lollipopen
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
+            toolbar.setPadding(0, getStatusBarHeight(), 0, 0);
+        }
+
 	}
+
+    // http://blog.raffaeu.com/archive/2015/04/11/android-and-the-transparent-status-bar.aspx
+    public int getStatusBarHeight() {
+        int result = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            result = getResources().getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
