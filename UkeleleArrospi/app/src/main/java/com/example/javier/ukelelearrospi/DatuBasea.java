@@ -32,12 +32,12 @@ public class DatuBasea extends SQLiteOpenHelper {
 
         db.execSQL( "CREATE TABLE INFOKANTA(" +
                 " kantaIzena TEXT PRIMARY KEY," +
-                " pathIrudia TEXT NOT NULL," +
+                " pathIrudia TEXT," +
                 " pathKanta TEXT NOT NULL," +
                 " pathYoutube TEXT NOT NULL," +
                 " zailtasunMaila INTEGER NOT NULL," +
                 " egilea TEXT NOT NULL," +
-                " iraupena INTEGER NOT NULL);");
+                " iraupena INTEGER);");
         Log.i(this.getClass().toString(), "KANTAINFO Taula sortuta");
 
         db.execSQL( "CREATE TABLE INFOAKORDE(" +
@@ -45,36 +45,40 @@ public class DatuBasea extends SQLiteOpenHelper {
                 " pathIrudia TEXT NOT NULL);");
         Log.i(this.getClass().toString(), "AKORDEINFO Taula sortuta");
 
-        /*
+
         db.execSQL( "CREATE TABLE KANTAAKORDE(" +
-                " kantaIzena TEXT PRIMARY KEY," +
-                " akordeIzena TEXT PRIMARY KEY," +
+                " kantaIzena TEXT NOT NULL," +
+                " akordeIzena TEXT NOT NULL," +
                 " FOREIGN KEY(kantaIzena) REFERENCES INFOKANTA(kantaIzena)," +
-                " FOREIGN KEY(akordeIzena) REFERENCES INFOAKORDE(akordeIzena));");
+                " FOREIGN KEY(akordeIzena) REFERENCES INFOAKORDE(akordeIzena)," +
+                " PRIMARY KEY(kantaIzena, akordeIzena));");
         Log.i(this.getClass().toString(), "KANTAAKORDE Taula sortuta");
 
 
         db.execSQL( "CREATE TABLE FAVORITOS(" +
-                " username VARCHAR(300) PRIMARY KEY," +
-                " kantaIzena TEXT PRIMARY KEY," +
+                " username VARCHAR(300) NOT NULL" +
+                " kantaIzena TEXT NOT NULL," +
                 " FOREIGN KEY(kantaIzena) REFERENCES INFOKANTA(kantaIzena)," +
-                " FOREIGN KEY(username) REFERENCES USER(username));");
+                " FOREIGN KEY(username) REFERENCES USER(username)," +
+                " PRIMARY KEY(username, kantaIzena));");
         Log.i(this.getClass().toString(), "FAVORITOS Taula sortuta");
 
 
         db.execSQL( "CREATE TABLE PENDIENTEAK(" +
-                " username VARCHAR(300) PRIMARY KEY," +
-                " kantaIzena TEXT PRIMARY KEY," +
+                " username VARCHAR(300) NOT NULL," +
+                " kantaIzena TEXT NOT NULL," +
                 " FOREIGN KEY(kantaIzena) REFERENCES INFOKANTA(kantaIzena)," +
-                " FOREIGN KEY(username) REFERENCES USER(username));");
+                " FOREIGN KEY(username) REFERENCES USER(username)," +
+                " PRIMARY KEY(username, kantaIzena));");
 
         Log.i(this.getClass().toString(), "PENDIENTEAK Taula sortuta");
 
         db.execSQL( "CREATE TABLE IKASIAK(" +
-                " username VARCHAR(300) PRIMARY KEY," +
-                " kantaIzena TEXT PRIMARY KEY," +
+                " username VARCHAR(300) NOT NULL," +
+                " kantaIzena TEXT NOT NULL," +
                 " FOREIGN KEY(kantaIzena) REFERENCES INFOKANTA(kantaIzena)," +
-                " FOREIGN KEY(username) REFERENCES USER(username));");
+                " FOREIGN KEY(username) REFERENCES USER(username)," +
+                " PRIMARY KEY(kantaIzena, username));");
 
         Log.i(this.getClass().toString(), "IKASIAK Taula sortuta");
 
@@ -82,7 +86,7 @@ public class DatuBasea extends SQLiteOpenHelper {
                 " username VARCHAR(300) PRIMARY KEY);");
 
         Log.i(this.getClass().toString(), "LOGIN Taula sortuta");
-        */
+
         datuBaseanKantuakSartu(db);
     }
 
