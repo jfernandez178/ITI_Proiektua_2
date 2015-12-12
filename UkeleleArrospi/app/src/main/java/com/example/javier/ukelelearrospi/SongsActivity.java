@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 public class SongsActivity extends Fragment implements TextWatcher {
 
@@ -19,6 +20,8 @@ public class SongsActivity extends Fragment implements TextWatcher {
     private SongsAdapter adapter;
 
     private EditText searchEditText;
+    private View advancedView;
+    private ImageView zabalduItxiAdvanced;
 
 
     @Override
@@ -26,6 +29,8 @@ public class SongsActivity extends Fragment implements TextWatcher {
         View v = inflater.inflate(R.layout.activity_songs, container, false);
 
         logika = new SongsActivityLogika(getActivity());
+        advancedView = v.findViewById(R.id.advanced_search);
+        zabalduItxiAdvanced = (ImageView) v.findViewById(R.id.zabalduItxiAdvanced);
 
         // Zerrenda
         RecyclerView recyclerView = ((RecyclerView) v.findViewById(R.id.recycler_view));
@@ -38,7 +43,24 @@ public class SongsActivity extends Fragment implements TextWatcher {
         searchEditText = (EditText) v.findViewById(R.id.songs_search_edit_text);
         searchEditText.addTextChangedListener(this);
 
+        v.findViewById(R.id.zabalduItxiAdvanced).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                erakutsiEdoEzkutatuAdvanced();
+            }
+        });
+
         return v;
+    }
+
+    private void erakutsiEdoEzkutatuAdvanced(){
+        if (advancedView.getVisibility() == View.GONE){
+            advancedView.setVisibility(View.VISIBLE);
+            zabalduItxiAdvanced.setImageResource(R.drawable.ic_unfold_less_24dp);
+        }else{
+            advancedView.setVisibility(View.GONE);
+            zabalduItxiAdvanced.setImageResource(R.drawable.ic_unfold_more_24dp);
+        }
     }
 
 
