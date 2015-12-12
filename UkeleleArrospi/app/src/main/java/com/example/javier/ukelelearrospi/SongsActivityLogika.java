@@ -26,6 +26,7 @@ public class SongsActivityLogika {
         while(c.moveToNext()){
             SongInfo info = new SongInfo();
             info.setName(c.getString(0));
+            info.setZailtasuna(c.getInt(4));
             kantaGuztiak.add(info);
         }
     }

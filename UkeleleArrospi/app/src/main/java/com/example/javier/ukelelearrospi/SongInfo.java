@@ -4,20 +4,21 @@ import java.io.Serializable;
 
 public class SongInfo implements Serializable {
     private static final long serialVersionUID = 1L;
-    
-    int index;
-    String songName;
-    String songMp3;
-    String songYoutube;
-    
-    public void setIndex(int ind) {
-        index= ind;    
-    }
-    
+
+    private int index;
+    private String songName;
+    private String songMp3;
+    private String songYoutube;
+    private int zailtasuna;
+
     public int getIndex() {
         return index;
     }
-    
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
     public void setName(String name) {
         songName= name;    
     }
@@ -39,5 +40,13 @@ public class SongInfo implements Serializable {
     
     public String getYoutube() {
         return songYoutube;
+    }
+
+    public int getZailtasuna() {
+        return zailtasuna;
+    }
+
+    public void setZailtasuna(int zailtasuna) {
+        this.zailtasuna = zailtasuna;
     }
 }
