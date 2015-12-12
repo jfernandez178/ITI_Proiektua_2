@@ -3,15 +3,25 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <View
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/dim_foreground_disabled_material_dark"/>
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="12dp"
+            android:layout_height="match_parent"
+            android:background="@color/dim_foreground_disabled_material_dark"
+            android:id="@+id/song_zailtasuna" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp">
+        android:padding="10dp">
+
+
 
         <TextView
             android:layout_width="wrap_content"
@@ -40,6 +50,13 @@
 
 
     </RelativeLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/dim_foreground_disabled_material_dark"/>
 
     <View
         android:layout_width="match_parent"

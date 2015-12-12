@@ -48,13 +48,13 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
 
     public static class SongViewHolder extends RecyclerView.ViewHolder{
 
-        private View mainView;
+        private View zailtasunaView;
         private TextView songName;
         private TextView authorName;
 
         public SongViewHolder(View itemView) {
             super(itemView);
-            mainView = itemView;
+            zailtasunaView = itemView.findViewById(R.id.song_zailtasuna);
             songName = (TextView) itemView.findViewById(R.id.song_item_name);
             authorName = (TextView) itemView.findViewById(R.id.song_item_author);
         }
@@ -63,9 +63,9 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
             songName.setText(info.getName());
             authorName.setText(info.getName());
             if (info.getZailtasuna()<3){
-                mainView.setBackgroundColor(mainView.getResources().getColor(R.color.zailtasuna_erreza));
+                zailtasunaView.setBackgroundColor(zailtasunaView.getResources().getColor(R.color.zailtasuna_erreza));
             }else{
-                mainView.setBackgroundColor(mainView.getResources().getColor(R.color.error_color));
+                zailtasunaView.setBackgroundColor(zailtasunaView.getResources().getColor(R.color.zailtasuna_zaila));
             }
         }
     }
