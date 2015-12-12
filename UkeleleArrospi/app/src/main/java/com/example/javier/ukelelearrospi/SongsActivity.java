@@ -12,13 +12,18 @@ import android.view.ViewGroup;
 
 public class SongsActivity extends Fragment {
 
+    private SongsActivityLogika logika;
+    private SongsAdapter adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_songs, container, false);
         RecyclerView recyclerView = ((RecyclerView) v.findViewById(R.id.recycler_view));
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        //recyclerView.setAdapter(new LanguageAdapter());
+        logika = new SongsActivityLogika(getActivity());
+        adapter = new SongsAdapter(logika.getSongs());
+        recyclerView.setAdapter(adapter);
         return v;
     }
     

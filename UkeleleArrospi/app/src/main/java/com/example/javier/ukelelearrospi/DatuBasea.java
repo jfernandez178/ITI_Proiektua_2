@@ -45,6 +45,7 @@ public class DatuBasea extends SQLiteOpenHelper {
                 " pathIrudia TEXT NOT NULL);");
         Log.i(this.getClass().toString(), "AKORDEINFO Taula sortuta");
 
+        /*
         db.execSQL( "CREATE TABLE KANTAAKORDE(" +
                 " kantaIzena TEXT PRIMARY KEY," +
                 " akordeIzena TEXT PRIMARY KEY," +
@@ -81,6 +82,7 @@ public class DatuBasea extends SQLiteOpenHelper {
                 " username VARCHAR(300) PRIMARY KEY);");
 
         Log.i(this.getClass().toString(), "LOGIN Taula sortuta");
+        */
         datuBaseanKantuakSartu(db);
     }
 

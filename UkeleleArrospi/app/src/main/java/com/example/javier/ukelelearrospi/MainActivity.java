@@ -59,12 +59,12 @@ public class MainActivity extends AppCompatActivity {
                 openWikipedia(null);
                 break;
             case R.id.drawer_main_learn:
-                openLearn(null);
+                fragment = new SongsActivity();
                 break;
         }
 
         //TODO Fragmentu bezela jartzean deskomentatu
-        /*
+
 
         android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
         menuItem.setChecked(true);
         mDrawerLayout.closeDrawers();
-        */
+
     }
 
     private void drawerraKudeatu(){

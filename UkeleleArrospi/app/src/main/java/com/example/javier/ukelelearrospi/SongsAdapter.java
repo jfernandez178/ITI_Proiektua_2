@@ -15,9 +15,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
 
     private ArrayList<SongInfo> kantuak;
 
-    public SongsAdapter(){
+    public SongsAdapter(ArrayList<SongInfo> pKantuak){
+        kantuak = pKantuak;
         setHasStableIds(true);
     }
+
+
 
     @Override
     public SongViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

@@ -1,6 +1,7 @@
 package com.example.javier.ukelelearrospi;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import java.util.ArrayList;
@@ -18,7 +19,14 @@ public class SongsActivityLogika {
     }
 
     public ArrayList<SongInfo> getSongs(){
-        Object result = db.execSQL("SELECT * FROM INFOKANTA");
+        ArrayList<SongInfo> songInfos = new ArrayList<>();
+        Cursor c = db.rawQuery("SELECT * FROM INFOKANTA", null);
+        while(c.moveToNext()){
+            SongInfo info = new SongInfo();
+            info.setName(c.getString(0));
+            songInfos.add(info);
+        }
+        return songInfos;
     }
 
 }
