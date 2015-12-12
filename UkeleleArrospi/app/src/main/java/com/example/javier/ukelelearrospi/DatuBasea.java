@@ -81,11 +81,49 @@ public class DatuBasea extends SQLiteOpenHelper {
                 " username VARCHAR(300) PRIMARY KEY);");
 
         Log.i(this.getClass().toString(), "LOGIN Taula sortuta");
-
+        datuBaseanKantuakSartu(db);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }
+
+
+    /*
+
+    String[] songs = {
+            "HALLELUJAH",
+            "I SHOT THE SHERIFF",
+            "I AM YOURS",
+            "LET IT BE",
+            "SOMEWHERE OVER THE RAINBOW",
+            "SWEET HOME ALABAMA",
+                     };
+
+    String[] songsMp3 = {
+            "HALLELUJAH-MP3",
+            "I SHOT THE SHERIFF",
+            "I AM YOURS",
+            "LET IT BE",
+            "SOMEWHERE OVER THE RAINBOW",
+            "SWEET HOME ALABAMA",
+                     };
+
+    String[] songsYoutube = {
+            "http://www.youtube.com/watch?v=XzOdXhywIbo",
+            "http://www.youtube.com/watch?v=IzTgYrnhYhs",
+            "http://www.youtube.com/watch?v=1VyPSzbe_x0",
+            "http://www.youtube.com/watch?v=LoVvrLPX4eQ",
+            "http://www.youtube.com/watch?v=1PiscVZSuEE",
+            "http://www.youtube.com/watch?v=LDCzpvvSvjY",
+                     };
+     */
+
+    private void datuBaseanKantuakSartu(SQLiteDatabase db){
+        for (int i=0; i < 50; i++){
+            db.execSQL("INSERT INTO INFOKANTA VALUES ('HALLELUJAH"+String.valueOf(i)+"', '', 'HALLELUJAH', 'http://www.youtube.com/watch?v=XzOdXhywIbo', 3, 'Ander', 138)");
+        }
 
     }
 }
