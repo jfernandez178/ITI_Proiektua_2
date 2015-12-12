@@ -27,5 +27,8 @@
     <string name="drawer_open">Zabalik</string>
     <string name="drawer_close">Itxita</string>
 
+    <string name="titulo">Título</string>
+    <string name="autor">Autor</string>
+
 
 </resources>

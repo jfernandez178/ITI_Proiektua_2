@@ -6,5 +6,7 @@
     <color name="accent">#448AFF</color>
 
     <color name="zailtasuna_erreza">#339933</color>
-    <color name="zailtasuna_zaila">#CF5555</color>
+    <color name="zailtasuna_ertaina">#FFFF00</color>
+    <color name="zailtasuna_zaila">#FFAA00</color>
+    <color name="zailtasuna_oso_zaila">#CF5555</color>
 </resources>

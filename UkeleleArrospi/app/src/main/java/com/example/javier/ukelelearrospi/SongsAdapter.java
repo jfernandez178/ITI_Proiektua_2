@@ -62,11 +62,25 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
         public void setSong(SongInfo info){
             songName.setText(info.getName());
             authorName.setText(info.getName());
-            if (info.getZailtasuna()<3){
-                zailtasunaView.setBackgroundColor(zailtasunaView.getResources().getColor(R.color.zailtasuna_erreza));
-            }else{
-                zailtasunaView.setBackgroundColor(zailtasunaView.getResources().getColor(R.color.zailtasuna_zaila));
+            int color;
+            switch (info.getZailtasuna()){
+                case 0:
+                    color = zailtasunaView.getResources().getColor(R.color.zailtasuna_erreza);
+                    break;
+                case 1:
+                    color = zailtasunaView.getResources().getColor(R.color.zailtasuna_ertaina);
+                    break;
+                case 2:
+                    color = zailtasunaView.getResources().getColor(R.color.zailtasuna_zaila);
+                    break;
+                case 3:
+                    color = zailtasunaView.getResources().getColor(R.color.zailtasuna_oso_zaila);
+                    break;
+                default:
+                    color = zailtasunaView.getResources().getColor(R.color.background_material_dark);
+                    break;
             }
+            zailtasunaView.setBackgroundColor(color);
         }
     }
 
