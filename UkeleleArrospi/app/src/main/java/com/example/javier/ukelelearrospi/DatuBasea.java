@@ -92,8 +92,6 @@ public class DatuBasea extends SQLiteOpenHelper {
     }
 
 
-    /*
-
     String[] songs = {
             "HALLELUJAH",
             "I SHOT THE SHERIFF",
@@ -101,7 +99,11 @@ public class DatuBasea extends SQLiteOpenHelper {
             "LET IT BE",
             "SOMEWHERE OVER THE RAINBOW",
             "SWEET HOME ALABAMA",
-                     };
+    };
+
+    /*
+
+
 
     String[] songsMp3 = {
             "HALLELUJAH-MP3",
@@ -123,8 +125,8 @@ public class DatuBasea extends SQLiteOpenHelper {
      */
 
     private void datuBaseanKantuakSartu(SQLiteDatabase db){
-        for (int i=0; i < 50; i++){
-            db.execSQL("INSERT INTO INFOKANTA VALUES ('HALLELUJAH"+String.valueOf(i)+"', '', 'HALLELUJAH', 'http://www.youtube.com/watch?v=XzOdXhywIbo', 3, 'Ander', 138)");
+        for (int i=0; i < songs.length; i++){
+            db.execSQL("INSERT INTO INFOKANTA VALUES ('"+songs[i]+"', '', '"+songs[i]+"', 'http://www.youtube.com/watch?v=XzOdXhywIbo', 3, 'Ander', 138)");
         }
 
     }

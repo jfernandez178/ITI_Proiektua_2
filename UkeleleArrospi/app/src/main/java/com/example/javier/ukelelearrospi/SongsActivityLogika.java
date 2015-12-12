@@ -41,7 +41,7 @@ public class SongsActivityLogika {
         }else{
             ArrayList<SongInfo> kantuak = new ArrayList<>();
             for (int i=0; i<kantaGuztiak.size(); i++){
-                if (kantaGuztiak.get(i).getName().contains(search)){
+                if (kantaGuztiak.get(i).getName().toLowerCase().contains(search.toLowerCase())){
                     kantuak.add(kantaGuztiak.get(i));
                 }
             }
