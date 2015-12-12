@@ -20,7 +20,10 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
         setHasStableIds(true);
     }
 
-
+    public void setSongs(ArrayList<SongInfo> kantuBerriak){
+        kantuak = kantuBerriak;
+        notifyDataSetChanged();
+    }
 
     @Override
     public SongViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

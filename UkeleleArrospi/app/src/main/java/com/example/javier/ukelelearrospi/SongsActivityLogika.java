@@ -11,22 +11,42 @@ import java.util.ArrayList;
  */
 public class SongsActivityLogika {
 
-    SQLiteDatabase db;
+    private SQLiteDatabase db;
+    private ArrayList<SongInfo> kantaGuztiak;
 
     public SongsActivityLogika(Context c){
         DatuBasea datuBasea = new DatuBasea(c);
         db = datuBasea.getWritableDatabase();
+        loadSongs();
     }
 
-    public ArrayList<SongInfo> getSongs(){
-        ArrayList<SongInfo> songInfos = new ArrayList<>();
+    private void loadSongs(){
+        kantaGuztiak = new ArrayList<>();
         Cursor c = db.rawQuery("SELECT * FROM INFOKANTA", null);
         while(c.moveToNext()){
             SongInfo info = new SongInfo();
             info.setName(c.getString(0));
-            songInfos.add(info);
+            kantaGuztiak.add(info);
         }
-        return songInfos;
+    }
+
+    /**
+     * Kantu zerrenda bueltatzen du
+     * @param search izenean izan behar duen textua. Hutsik edo null bada guztiak bueltatzen dira
+     * @return Kantu zerrenda
+     */
+    public ArrayList<SongInfo> getSongs(String search){
+        if (search == null || search.isEmpty() || search.trim().length() == 0){
+            return kantaGuztiak;
+        }else{
+            ArrayList<SongInfo> kantuak = new ArrayList<>();
+            for (int i=0; i<kantaGuztiak.size(); i++){
+                if (kantaGuztiak.get(i).getName().contains(search)){
+                    kantuak.add(kantaGuztiak.get(i));
+                }
+            }
+            return kantuak;
+        }
     }
 
 }
