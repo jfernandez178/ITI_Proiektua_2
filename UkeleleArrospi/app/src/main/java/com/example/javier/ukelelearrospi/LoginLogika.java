@@ -16,27 +16,28 @@ public class LoginLogika {
     private SQLiteDatabase db;
     private static Context context;
 
-    private LoginLogika(Context pContext){
+    public LoginLogika(Context pContext){
         //datu-base kudeatzailea instantziatzen da
         context = pContext;
         DatuBasea dbHelper = new DatuBasea(pContext);
         db = dbHelper.getWritableDatabase();
-
     }
 
+    /*
     public static synchronized LoginLogika getNireLoginLogika(){
         if(nireLoginLogika == null){
             nireLoginLogika = new LoginLogika(context);
         }
         return nireLoginLogika;
     }
+    */
 
     //Erabiltzaileren bat baldin badago sesioa irekita jakiteko
     public boolean sesioaIrekita(){
         boolean irekita = false;
 
         //Erabiltzailerik logeatuta dagoen edo ez ikusten da, menu nagusia bistaratzeko edo login pantaila bistaratzeko
-        Cursor c = db.rawQuery("SELECT * from LOGIN", null);
+        Cursor c = db.rawQuery("SELECT * from LOGIN_DONE", null);
 
         //Elementurik baldin badauka, logeatuta dago erabiltzailea lehendik
         if(c.moveToFirst()){
@@ -92,7 +93,7 @@ public class LoginLogika {
 
     //Erabiltzailea logeatuta dagoela adierazteko metodoa
     public void loguearUsuario(String username){
-        db.rawQuery("INSERT INTO LOGIN values('" + username + "');", null);
+        db.rawQuery("INSERT INTO LOGIN_DONE values('" + username + "');", null);
     }
 
 }

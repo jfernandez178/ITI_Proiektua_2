@@ -35,7 +35,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
     private TextToSpeech myTTS;
     @Override
     public void onInit(int status) {
-
         if (status == TextToSpeech.SUCCESS) {
             // ...
         }
@@ -98,7 +97,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
         botonRegistrar.setOnClickListener(this);
 
         //Loginaren logikare klasea instantziatzen da
-        nireLoginLogika = LoginLogika.getNireLoginLogika();
+        nireLoginLogika = new LoginLogika(this);
 
         //Erabiltzaileren batek sesioa irekita duen edo ez konprobatzen da
         boolean sesioaIrekita = nireLoginLogika.sesioaIrekita();

@@ -5,6 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 /**
  * Created by Javier on 10/03/2015.
  */
@@ -25,10 +28,23 @@ public class DatuBasea extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         Log.i(this.getClass().toString(), "Datu basea sortzen");
 
-        db.execSQL( "CREATE TABLE LOGIN(" +
+        db.execSQL("CREATE TABLE LOGIN(" +
                 "username VARCHAR(120) PRIMARY KEY, " +
                 "password VARCHAR(300) NOT NULL);");
         Log.i(this.getClass().toString(), "LOGIN Taula sortuta");
+
+        //TODO Gero kendu hau
+        MessageDigest md = null;
+        try {
+            md = MessageDigest.getInstance("MD5");
+            md.update("orcodelmal".getBytes());
+            String pass =  bytesToHex(md.digest());
+            db.execSQL("INSERT INTO LOGIN VALUES('arrospi','"+pass+"')");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        //TODO KENDU GOIKOA
+
 
         db.execSQL( "CREATE TABLE INFOKANTA(" +
                 " kantaIzena TEXT PRIMARY KEY," +
@@ -56,7 +72,7 @@ public class DatuBasea extends SQLiteOpenHelper {
 
 
         db.execSQL( "CREATE TABLE FAVORITOS(" +
-                " username VARCHAR(300) NOT NULL" +
+                " username VARCHAR(300) NOT NULL," +
                 " kantaIzena TEXT NOT NULL," +
                 " FOREIGN KEY(kantaIzena) REFERENCES INFOKANTA(kantaIzena)," +
                 " FOREIGN KEY(username) REFERENCES USER(username)," +
@@ -82,10 +98,10 @@ public class DatuBasea extends SQLiteOpenHelper {
 
         Log.i(this.getClass().toString(), "IKASIAK Taula sortuta");
 
-        db.execSQL( "CREATE TABLE LOGIN(" +
+        db.execSQL( "CREATE TABLE LOGIN_DONE(" +
                 " username VARCHAR(300) PRIMARY KEY);");
 
-        Log.i(this.getClass().toString(), "LOGIN Taula sortuta");
+        Log.i(this.getClass().toString(), "LOGIN_DONE Taula sortuta");
 
         datuBaseanKantuakSartu(db);
     }
@@ -133,5 +149,18 @@ public class DatuBasea extends SQLiteOpenHelper {
             db.execSQL("INSERT INTO INFOKANTA VALUES ('"+songs[i]+"', '', '"+songs[i]+"', 'http://www.youtube.com/watch?v=XzOdXhywIbo', "+i+", 'Ander', 138)");
         }
 
+    }
+
+    //TODO KEndu hau gero
+    //Método de ayuda para hash-ear la contraseña
+    public static String bytesToHex(byte[] b) {
+        char hexDigit[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+                'A', 'B', 'C', 'D', 'E', 'F'};
+        StringBuffer buf = new StringBuffer();
+        for (int j = 0; j < b.length; j++) {
+            buf.append(hexDigit[(b[j] >> 4) & 0x0f]);
+            buf.append(hexDigit[b[j] & 0x0f]);
+        }
+        return buf.toString();
     }
 }
