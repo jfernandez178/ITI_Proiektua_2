@@ -62,12 +62,43 @@ public class SongsActivityLogika {
         }else{
             ArrayList<SongInfo> kantuak = new ArrayList<>();
             for (int i=0; i<kantaGuztiak.size(); i++){
-                if (kantaGuztiak.get(i).getName().toLowerCase().contains(search.toLowerCase())){
+                if (isSongValid(kantaGuztiak.get(i), search, null, -1, false)){
                     kantuak.add(kantaGuztiak.get(i));
                 }
             }
             return kantuak;
         }
+    }
+
+    /**
+     *
+     * @param song
+     * @param title
+     * @param author
+     * @param zailtasuna
+     * @param favorito
+     * @return
+     */
+    private boolean isSongValid(SongInfo song, String title, String author, int zailtasuna, boolean favorito){
+        if (title != null && !title.trim().isEmpty()){
+            if (!song.getName().contains(title)){
+                return false;
+            }
+        }
+        if (author != null && !author.trim().isEmpty()){
+            if (!song.getAuthor().contains(author)){
+                return false;
+            }
+        }
+        if (zailtasuna >= 0){
+            if (zailtasuna != song.getZailtasuna()){
+                return false;
+            }
+        }
+        if (favorito && !song.isFavorito()){
+            return false;
+        }
+        return true;
     }
 
 }

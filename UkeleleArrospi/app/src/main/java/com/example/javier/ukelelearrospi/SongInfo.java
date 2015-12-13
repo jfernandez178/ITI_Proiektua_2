@@ -7,6 +7,7 @@ public class SongInfo implements Serializable {
 
     private int index;
     private String songName;
+    private String author;
     private String songMp3;
     private String songYoutube;
     private int zailtasuna;
@@ -58,4 +59,13 @@ public class SongInfo implements Serializable {
     public void setFavorito(boolean favorito) {
         this.favorito = favorito;
     }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
 }
