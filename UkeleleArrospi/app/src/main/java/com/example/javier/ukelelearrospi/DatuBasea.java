@@ -146,7 +146,7 @@ public class DatuBasea extends SQLiteOpenHelper {
 
     private void datuBaseanKantuakSartu(SQLiteDatabase db){
         for (int i=0; i < songs.length; i++){
-            db.execSQL("INSERT INTO INFOKANTA VALUES ('"+songs[i]+"', '', '"+songs[i]+"', 'http://www.youtube.com/watch?v=XzOdXhywIbo', "+i+", 'Ander', 138)");
+            db.execSQL("INSERT INTO INFOKANTA VALUES ('"+songs[i]+"', '', '"+songs[i]+"', 'http://www.youtube.com/watch?v=XzOdXhywIbo', "+(i % 4)+", 'Ander', 138)");
         }
     }
 
