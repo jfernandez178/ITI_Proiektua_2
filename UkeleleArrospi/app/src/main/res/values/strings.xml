@@ -29,6 +29,6 @@
 
     <string name="titulo">Título</string>
     <string name="autor">Autor</string>
-
+    <string name="sign_out">Cerrar sesión</string>
 
 </resources>

@@ -61,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.drawer_main_learn:
                 fragment = new SongsActivity();
                 break;
+            case R.id.drawer_sign_out:
+                //TODO Sesioa itxi
+                break;
         }
 
         //TODO Fragmentu bezela jartzean deskomentatu
@@ -189,7 +192,6 @@ public class MainActivity extends AppCompatActivity {
 	public void openLearn(View v) {
 		Intent i = new Intent("assig.app2.learnukulele.SongsActivity");
 		startActivity(i);
-		
 	}
 	
 	
