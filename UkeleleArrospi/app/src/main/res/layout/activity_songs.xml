@@ -46,13 +46,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
+                android:text="@string/zailtasuna"
                 android:id="@+id/textView3" />
 
             <Spinner
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/spinner" />
+                android:id="@+id/spinner"
+                android:entries="@array/zailtasuna"/>
         </LinearLayout>
     </TableLayout>
 
