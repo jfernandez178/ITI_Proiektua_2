@@ -12,6 +12,8 @@ public class SongInfo implements Serializable {
     private String songYoutube;
     private int zailtasuna;
     private boolean favorito;
+    private boolean pendiente;
+    private boolean ikasia;
 
     public int getIndex() {
         return index;
@@ -68,4 +70,19 @@ public class SongInfo implements Serializable {
         this.author = author;
     }
 
+    public boolean isIkasia() {
+        return ikasia;
+    }
+
+    public void setIkasia(boolean ikasia) {
+        this.ikasia = ikasia;
+    }
+
+    public boolean isPendiente() {
+        return pendiente;
+    }
+
+    public void setPendiente(boolean pendiente) {
+        this.pendiente = pendiente;
+    }
 }

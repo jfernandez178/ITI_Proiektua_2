@@ -20,6 +20,7 @@ public class SongsActivity extends Fragment implements TextWatcher {
     private SongsAdapter adapter;
 
     private EditText searchEditText;
+    private EditText autor;
     private View advancedView;
     private ImageView zabalduItxiAdvanced;
 
@@ -52,6 +53,8 @@ public class SongsActivity extends Fragment implements TextWatcher {
         // Bilaketa
         searchEditText = (EditText) v.findViewById(R.id.songs_search_edit_text);
         searchEditText.addTextChangedListener(this);
+        autor = (EditText) v.findViewById(R.id.autor_edit_text);
+        autor.addTextChangedListener(this);
 
         v.findViewById(R.id.zabalduItxiAdvanced).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,6 +62,8 @@ public class SongsActivity extends Fragment implements TextWatcher {
                 erakutsiEdoEzkutatuAdvanced();
             }
         });
+
+        erakutsiEdoEzkutatuAdvanced();
 
         return v;
     }

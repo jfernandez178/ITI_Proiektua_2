@@ -200,9 +200,6 @@ public class SongBerriaFragment extends Fragment implements View.OnClickListener
                             Toast.LENGTH_SHORT).show();
                 }
 
-
-
-
                 break;
 
         }

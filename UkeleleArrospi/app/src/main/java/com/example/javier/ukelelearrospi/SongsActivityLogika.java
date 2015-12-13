@@ -37,6 +37,18 @@ public class SongsActivityLogika {
             }else{
                 info.setFavorito(false);
             }
+            c2 = db.rawQuery("SELECT * FROM PENDIENTEAK WHERE username='"+username+"' AND kantaIzena='"+c.getString(0)+"'" , null);
+            if (c2.moveToFirst()){
+                info.setPendiente(true);
+            }else{
+                info.setPendiente(false);
+            }
+            c2 = db.rawQuery("SELECT * FROM IKASIAK WHERE username='"+username+"' AND kantaIzena='"+c.getString(0)+"'" , null);
+            if (c2.moveToFirst()){
+                info.setIkasia(true);
+            }else{
+                info.setIkasia(false);
+            }
             kantaGuztiak.add(info);
         }
     }
