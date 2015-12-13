@@ -11,10 +11,14 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
-public class SongsActivity extends Fragment implements TextWatcher {
+public class SongsActivity extends Fragment implements TextWatcher, AdapterView.OnItemClickListener, CompoundButton.OnCheckedChangeListener {
 
     private SongsActivityLogika logika;
     private SongsAdapter adapter;
@@ -24,6 +28,11 @@ public class SongsActivity extends Fragment implements TextWatcher {
     private View advancedView;
     private ImageView zabalduItxiAdvanced;
 
+    private Spinner zailtasuna;
+    private CheckBox favorito;
+    private CheckBox pendiente;
+    private CheckBox ikasia;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,6 +41,18 @@ public class SongsActivity extends Fragment implements TextWatcher {
         logika = new SongsActivityLogika(getActivity());
         advancedView = v.findViewById(R.id.advanced_search);
         zabalduItxiAdvanced = (ImageView) v.findViewById(R.id.zabalduItxiAdvanced);
+
+
+        zailtasuna = (Spinner) v.findViewById(R.id.spinnerZailtasuna);
+        favorito = (CheckBox) v.findViewById(R.id.checkBoxFavorito);
+        pendiente = (CheckBox) v.findViewById(R.id.checkBoxPendiente);
+        ikasia = (CheckBox) v.findViewById(R.id.checkBoxIkasia);
+
+        zailtasuna.setOnItemClickListener(this);
+
+        favorito.setOnCheckedChangeListener(this);
+        pendiente.setOnCheckedChangeListener(this);
+        ikasia.setOnCheckedChangeListener(this);
 
         v.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,11 +107,25 @@ public class SongsActivity extends Fragment implements TextWatcher {
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        adapter.setSongs(logika.getSongs(searchEditText.getText().toString()));
+        bilaketa();
     }
 
     @Override
     public void afterTextChanged(Editable editable) {
 
+    }
+    
+    public void bilaketa(){
+        adapter.setSongs(logika.getSongs(searchEditText.getText().toString()));
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        bilaketa();
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        bilaketa();
     }
 }
