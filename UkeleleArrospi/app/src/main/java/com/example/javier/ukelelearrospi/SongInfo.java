@@ -10,6 +10,7 @@ public class SongInfo implements Serializable {
     private String songMp3;
     private String songYoutube;
     private int zailtasuna;
+    private boolean favorito;
 
     public int getIndex() {
         return index;
@@ -48,5 +49,13 @@ public class SongInfo implements Serializable {
 
     public void setZailtasuna(int zailtasuna) {
         this.zailtasuna = zailtasuna;
+    }
+
+    public boolean isFavorito() {
+        return favorito;
+    }
+
+    public void setFavorito(boolean favorito) {
+        this.favorito = favorito;
     }
 }

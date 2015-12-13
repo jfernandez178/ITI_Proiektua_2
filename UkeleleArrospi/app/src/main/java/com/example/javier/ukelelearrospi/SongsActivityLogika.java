@@ -13,10 +13,14 @@ public class SongsActivityLogika {
 
     private SQLiteDatabase db;
     private ArrayList<SongInfo> kantaGuztiak;
+    private String username;
 
     public SongsActivityLogika(Context c){
         DatuBasea datuBasea = new DatuBasea(c);
         db = datuBasea.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM LOGIN_DONE", null);
+        cursor.moveToFirst();
+        username = cursor.getString(0);
         loadSongs();
     }
 
@@ -27,6 +31,12 @@ public class SongsActivityLogika {
             SongInfo info = new SongInfo();
             info.setName(c.getString(0));
             info.setZailtasuna(c.getInt(4));
+            Cursor c2 = db.rawQuery("SELECT * FROM FAVORITOS WHERE username='"+username+"' AND kantaIzena='"+c.getString(0)+"'" , null);
+            if (c2.moveToFirst()){
+                info.setFavorito(true);
+            }else{
+                info.setFavorito(false);
+            }
             kantaGuztiak.add(info);
         }
     }
