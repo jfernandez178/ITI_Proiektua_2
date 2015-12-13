@@ -1,0 +1,111 @@
+package com.example.javier.ukelelearrospi;
+
+import android.content.Intent;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
+public class ActivityErregistratu extends ActionBarActivity implements View.OnClickListener {
+
+    private Button botonErregistratu;
+    private EditText usernameText;
+    private EditText passwordText;
+    private EditText confirmPasswordText;
+
+    private String username;
+    private String password;
+    private String confirmPassword;
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_activity_erregistratu);
+
+        botonErregistratu = (Button) findViewById(R.id.buttonErregistratu);
+        botonErregistratu.setOnClickListener(this);
+        usernameText = (EditText) findViewById(R.id.username);
+        passwordText = (EditText) findViewById(R.id.password);
+        confirmPasswordText = (EditText) findViewById(R.id.confirmPassword);
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_activity_erregistratu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        switch(view.getId()){
+
+            case R.id.buttonErregistratu:
+
+                username = usernameText.getText().toString();
+                password = passwordText.getText().toString();
+                confirmPassword = confirmPasswordText.getText().toString();
+
+
+                //Balioak espezifikatu baldin baditu
+                if(!username.isEmpty() && !password.isEmpty() && !confirmPassword.isEmpty()){
+                    //Pasahitzaren konfirmazioa eta pasahitza berdinak izan behar dira
+                    if(password.equals(confirmPassword)){
+                        //Erregistratzen saiatzen da eta erregistroa zuzena bada fragmenta ixten da eta Login-era bueltatzen da.
+                        boolean ondoErregistratuDa = ErregistratuLogika.getErregistratuLogika(getApplicationContext()).ondoErregistratuDa(username, password);
+                        if(ondoErregistratuDa){
+                            Toast.makeText(getApplicationContext(), "Ondo erregistratu zara!",
+                                    Toast.LENGTH_SHORT).show();
+
+                            //Pantaila ixten da eta Login-a bistaratzen da
+                            finish();
+
+                            Intent i = new Intent(getBaseContext(), Login.class);
+                            startActivity(i);
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), "Erabiltzaile hori existitzen da",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), "Pasahitza eta konfirmazioa ez dira zuzenak",
+                                Toast.LENGTH_SHORT).show();
+
+                    }
+
+                }
+                else{
+                    Toast.makeText(getApplicationContext(), "Konprobatu eremu guztiak bete dituzula",
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                break;
+        }
+    }
+}

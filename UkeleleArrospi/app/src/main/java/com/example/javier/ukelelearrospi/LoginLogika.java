@@ -95,4 +95,12 @@ public class LoginLogika {
         db.execSQL("INSERT INTO LOGIN_DONE values('" + username + "');");
     }
 
+
+    //Datu-Baseko LOGIN_DONE taulako elementuak ezabatuko ditu
+    public void sesioaItxi(){
+
+        db.execSQL("DELETE FROM LOGIN_DONE");
+
+    }
+
 }

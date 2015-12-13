@@ -133,11 +133,15 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
                     finish();
                 }
                 else{
-                    //TODO:ALERT bat atera
+                    Toast.makeText(getApplicationContext(), "Erabiltzaile-izena edo pasahitza ez dira zuzenak",
+                            Toast.LENGTH_SHORT).show();
                 }
                 break;
             case R.id.botonRegistrar:
-                //TODO:erregistroa kudeatu
+                //Erregistratzeko pantaila irekiko da.
+                finish();
+                Intent i = new Intent(getBaseContext(), ActivityErregistratu.class);
+                startActivity(i);
                 break;
         }
 
