@@ -148,7 +148,6 @@ public class DatuBasea extends SQLiteOpenHelper {
         for (int i=0; i < songs.length; i++){
             db.execSQL("INSERT INTO INFOKANTA VALUES ('"+songs[i]+"', '', '"+songs[i]+"', 'http://www.youtube.com/watch?v=XzOdXhywIbo', "+i+", 'Ander', 138)");
         }
-
     }
 
     //TODO KEndu hau gero

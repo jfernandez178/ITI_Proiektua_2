@@ -41,6 +41,17 @@ public class SongsActivityLogika {
         }
     }
 
+    public void changeFavorito(SongInfo song){
+        if (song.isFavorito()){
+            db.execSQL("INSERT INTO FAVORITOS VALUES('"+username+"','"+song.getName()+"')");
+            song.setFavorito(true);
+        }else{
+            db.execSQL("DELETE FROM FAVORITOS WHERE username='"+username+"' AND kantaIzena='"+song.getName()+"'");
+            song.setFavorito(false);
+        }
+
+    }
+
     /**
      * Kantu zerrenda bueltatzen du
      * @param search izenean izan behar duen textua. Hutsik edo null bada guztiak bueltatzen dira

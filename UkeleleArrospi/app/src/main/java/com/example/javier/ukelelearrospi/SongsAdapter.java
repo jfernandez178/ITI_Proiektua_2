@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -14,9 +15,11 @@ import java.util.ArrayList;
 public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHolder> {
 
     private ArrayList<SongInfo> kantuak;
+    private SongsActivityLogika logika;
 
-    public SongsAdapter(ArrayList<SongInfo> pKantuak){
-        kantuak = pKantuak;
+    public SongsAdapter(SongsActivityLogika pLogika){
+        kantuak = logika.getSongs(null);
+        logika = pLogika;
         setHasStableIds(true);
     }
 
@@ -46,22 +49,33 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
         return kantuak.get(position).getName().hashCode();
     }
 
-    public static class SongViewHolder extends RecyclerView.ViewHolder{
+    public class SongViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+
+        private SongInfo songInfo;
 
         private View zailtasunaView;
         private TextView songName;
         private TextView authorName;
+        private ImageView starView;
 
         public SongViewHolder(View itemView) {
             super(itemView);
             zailtasunaView = itemView.findViewById(R.id.song_zailtasuna);
             songName = (TextView) itemView.findViewById(R.id.song_item_name);
             authorName = (TextView) itemView.findViewById(R.id.song_item_author);
+            starView = (ImageView) itemView.findViewById(R.id.song_star);
+            starView.setOnClickListener(this);
         }
 
         public void setSong(SongInfo info){
+            songInfo = info;
             songName.setText(info.getName());
             authorName.setText(info.getName());
+            if (info.isFavorito()){
+                starView.setImageResource(R.drawable.ic_star_24dp);
+            }else{
+                starView.setImageResource(R.drawable.ic_star_outline_24dp);
+            }
             int color;
             switch (info.getZailtasuna()){
                 case 0:
@@ -81,6 +95,14 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
                     break;
             }
             zailtasunaView.setBackgroundColor(color);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (view == starView){
+                logika.changeFavorito(songInfo);
+                setSong(songInfo);
+            }
         }
     }
 

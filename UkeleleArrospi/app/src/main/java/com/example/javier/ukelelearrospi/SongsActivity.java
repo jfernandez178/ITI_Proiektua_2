@@ -35,7 +35,7 @@ public class SongsActivity extends Fragment implements TextWatcher {
         // Zerrenda
         RecyclerView recyclerView = ((RecyclerView) v.findViewById(R.id.recycler_view));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new SongsAdapter(logika.getSongs(null));
+        adapter = new SongsAdapter(logika);
         recyclerView.setAdapter(adapter);
 
         // Bilaketa
