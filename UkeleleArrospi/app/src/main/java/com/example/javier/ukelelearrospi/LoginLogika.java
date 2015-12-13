@@ -87,7 +87,6 @@ public class LoginLogika {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return zuzena;
     }
 
