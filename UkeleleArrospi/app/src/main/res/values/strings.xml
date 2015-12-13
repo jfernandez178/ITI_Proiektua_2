@@ -32,6 +32,10 @@
     <string name="sign_out">Cerrar sesión</string>
     <string name="zailtasuna">Zailtasuna</string>
 
+    <string name="favorito">Gogokoa</string>
+    <string name="pendiente">Ikasteko</string>
+    <string name="ikasiak">Ikasiak</string>
+
     <string-array name="zailtasuna">
         <item>Edozein</item>
         <item>Erreza</item>
