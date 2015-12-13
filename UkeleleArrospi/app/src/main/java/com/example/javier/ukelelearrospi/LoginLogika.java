@@ -93,11 +93,7 @@ public class LoginLogika {
 
     //Erabiltzailea logeatuta dagoela adierazteko metodoa
     public void loguearUsuario(String username){
-        Log.d("PRoba", username);
         db.execSQL("INSERT INTO LOGIN_DONE values('" + username + "');");
-        Cursor cursor = db.rawQuery("SELECT * FROM LOGIN_DONE", null);
-        cursor.moveToFirst();
-        Log.d("Proba 2 ", cursor.getString(0));
     }
 
 }
