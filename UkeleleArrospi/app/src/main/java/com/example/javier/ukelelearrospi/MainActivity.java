@@ -62,19 +62,29 @@ public class MainActivity extends AppCompatActivity {
                 fragment = new SongsActivity();
                 break;
             case R.id.drawer_sign_out:
-                //TODO Sesioa itxi
+                LoginLogika l = new LoginLogika(getApplicationContext());
+                l.sesioaItxi();
+                fragment = null;
                 break;
         }
 
         //TODO Fragmentu bezela jartzean deskomentatu
 
 
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.content_frame, fragment)
-                .commit();
-        menuItem.setChecked(true);
-        mDrawerLayout.closeDrawers();
+        //Konprobatzen da ea fragment-a null den, eta horrela bada, Login pantaila irekiko da eta hau itxiko da
+        if(fragment == null){
+            finish();
+            Intent i = new Intent(getBaseContext(), Login.class);
+            startActivity(i);
+        }
+        else {
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_frame, fragment)
+                    .commit();
+            menuItem.setChecked(true);
+            mDrawerLayout.closeDrawers();
+        }
 
     }
 
