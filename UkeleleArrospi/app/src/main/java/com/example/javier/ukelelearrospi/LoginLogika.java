@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.security.MessageDigest;
 
@@ -87,13 +88,16 @@ public class LoginLogika {
             e.printStackTrace();
         }
 
-
         return zuzena;
     }
 
     //Erabiltzailea logeatuta dagoela adierazteko metodoa
     public void loguearUsuario(String username){
-        db.rawQuery("INSERT INTO LOGIN_DONE values('" + username + "');", null);
+        Log.d("PRoba", username);
+        db.execSQL("INSERT INTO LOGIN_DONE values('" + username + "');");
+        Cursor cursor = db.rawQuery("SELECT * FROM LOGIN_DONE", null);
+        cursor.moveToFirst();
+        Log.d("Proba 2 ", cursor.getString(0));
     }
 
 }
