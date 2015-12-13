@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
-public class SongsActivity extends Fragment implements TextWatcher, AdapterView.OnItemClickListener, CompoundButton.OnCheckedChangeListener {
+public class SongsActivity extends Fragment implements TextWatcher, AdapterView.OnItemClickListener, CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
 
     private SongsActivityLogika logika;
     private SongsAdapter adapter;
@@ -48,7 +48,7 @@ public class SongsActivity extends Fragment implements TextWatcher, AdapterView.
         pendiente = (CheckBox) v.findViewById(R.id.checkBoxPendiente);
         ikasia = (CheckBox) v.findViewById(R.id.checkBoxIkasia);
 
-        zailtasuna.setOnItemClickListener(this);
+        zailtasuna.setOnItemSelectedListener(this);
 
         favorito.setOnCheckedChangeListener(this);
         pendiente.setOnCheckedChangeListener(this);
@@ -114,9 +114,11 @@ public class SongsActivity extends Fragment implements TextWatcher, AdapterView.
     public void afterTextChanged(Editable editable) {
 
     }
-    
+
     public void bilaketa(){
-        adapter.setSongs(logika.getSongs(searchEditText.getText().toString()));
+        String titulo = searchEditText.getText().toString();
+        String autorText = autor.getText().toString();
+        adapter.setSongs(logika.getSongs(titulo, autorText, zailtasuna.getSelectedItemPosition()-1, favorito.isChecked(), pendiente.isChecked(), ikasia.isChecked()));
     }
 
     @Override
@@ -127,5 +129,15 @@ public class SongsActivity extends Fragment implements TextWatcher, AdapterView.
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         bilaketa();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        bilaketa();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }

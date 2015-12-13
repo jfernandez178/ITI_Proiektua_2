@@ -30,6 +30,7 @@ public class SongsActivityLogika {
         while(c.moveToNext()){
             SongInfo info = new SongInfo();
             info.setName(c.getString(0));
+            info.setAuthor(c.getString(5));
             info.setZailtasuna(c.getInt(4));
             Cursor c2 = db.rawQuery("SELECT * FROM FAVORITOS WHERE username='"+username+"' AND kantaIzena='"+c.getString(0)+"'" , null);
             if (c2.moveToFirst()){
@@ -65,21 +66,18 @@ public class SongsActivityLogika {
 
     /**
      * Kantu zerrenda bueltatzen du
-     * @param search izenean izan behar duen textua. Hutsik edo null bada guztiak bueltatzen dira
+     * @param titulo izenean izan behar duen textua. Hutsik edo null bada guztiak bueltatzen dira
      * @return Kantu zerrenda
      */
-    public ArrayList<SongInfo> getSongs(String search){
-        if (search == null || search.isEmpty() || search.trim().length() == 0){
-            return kantaGuztiak;
-        }else{
+    public ArrayList<SongInfo> getSongs(String titulo, String autor, int zailtasuna, boolean favorito, boolean pendiente, boolean ikasia){
             ArrayList<SongInfo> kantuak = new ArrayList<>();
             for (int i=0; i<kantaGuztiak.size(); i++){
-                if (isSongValid(kantaGuztiak.get(i), search, null, -1, false)){
+                if (isSongValid(kantaGuztiak.get(i), titulo, autor, zailtasuna, favorito, pendiente, ikasia)){
                     kantuak.add(kantaGuztiak.get(i));
                 }
             }
             return kantuak;
-        }
+
     }
 
     /**
@@ -91,7 +89,7 @@ public class SongsActivityLogika {
      * @param favorito
      * @return
      */
-    private boolean isSongValid(SongInfo song, String title, String author, int zailtasuna, boolean favorito){
+    private boolean isSongValid(SongInfo song, String title, String author, int zailtasuna, boolean favorito, boolean pendiente, boolean ikasia){
         if (title != null && !title.trim().isEmpty()){
             if (!song.getName().contains(title)){
                 return false;
@@ -108,6 +106,12 @@ public class SongsActivityLogika {
             }
         }
         if (favorito && !song.isFavorito()){
+            return false;
+        }
+        if (pendiente && !song.isPendiente()){
+            return false;
+        }
+        if (ikasia && !song.isIkasia()){
             return false;
         }
         return true;

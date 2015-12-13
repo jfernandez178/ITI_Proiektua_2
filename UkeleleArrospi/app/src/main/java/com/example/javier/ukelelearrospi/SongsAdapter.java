@@ -19,7 +19,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
 
     public SongsAdapter(SongsActivityLogika pLogika){
         logika = pLogika;
-        kantuak = logika.getSongs(null);
+        kantuak = logika.getSongs(null, null, -1, false, false, false);
         setHasStableIds(true);
     }
 
