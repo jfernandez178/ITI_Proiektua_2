@@ -32,6 +32,17 @@ public class SongsActivity extends Fragment implements TextWatcher {
         advancedView = v.findViewById(R.id.advanced_search);
         zabalduItxiAdvanced = (ImageView) v.findViewById(R.id.zabalduItxiAdvanced);
 
+        v.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, new SongBerriaFragment())
+                        .addToBackStack("lista_songs")
+                        .commit();
+            }
+        });
+
         // Zerrenda
         RecyclerView recyclerView = ((RecyclerView) v.findViewById(R.id.recycler_view));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));

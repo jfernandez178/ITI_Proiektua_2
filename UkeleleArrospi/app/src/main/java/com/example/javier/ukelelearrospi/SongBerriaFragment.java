@@ -4,16 +4,16 @@ import android.app.Activity;
 import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -52,9 +52,6 @@ public class SongBerriaFragment extends Fragment implements View.OnClickListener
     private SongBerrialogika songberrialogika;
 
 
-
-    private OnFragmentInteractionListener mListener;
-
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -90,14 +87,14 @@ public class SongBerriaFragment extends Fragment implements View.OnClickListener
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        View v = inflater.inflate(R.layout.activity_songs, container, false);
+        View v = inflater.inflate(R.layout.fragment_song_berria, container, false);
 
 
         buttonSortu = (Button) v.findViewById(R.id.buttonKantuaSortu);
-        kantuaIzenaText = (EditText) v.findViewById(R.id.textKantuIzena);
-        autoreaText = (EditText) v.findViewById(R.id.textAutoreIzena);
-        youtubeText = (EditText) v.findViewById(R.id.textYoutube);
-        mp3Text = (EditText) v.findViewById(R.id.textMP3);
+        kantuaIzenaText = (EditText) v.findViewById(R.id.kantuIzena);
+        autoreaText = (EditText) v.findViewById(R.id.autorea);
+        youtubeText = (EditText) v.findViewById(R.id.youtube);
+        mp3Text = (EditText) v.findViewById(R.id.mp3);
         textAukeratutakoAkordeak = (TextView) v.findViewById(R.id.textAukeratutakoAkordeak);
         buttonAkordeakAukeratu = (Button) v.findViewById(R.id.buttonAkordeakAukeratu);
         buttonAkordeakAukeratu.setOnClickListener(this);
@@ -108,28 +105,8 @@ public class SongBerriaFragment extends Fragment implements View.OnClickListener
         return inflater.inflate(R.layout.fragment_song_berria, container, false);
     }
 
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnFragmentInteractionListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
 
     @Override
     public void onClick(View view) {
@@ -218,6 +195,9 @@ public class SongBerriaFragment extends Fragment implements View.OnClickListener
                     }
 
 
+                }else{
+                    Toast.makeText(getActivity().getApplicationContext(), "kaka",
+                            Toast.LENGTH_SHORT).show();
                 }
 
 
