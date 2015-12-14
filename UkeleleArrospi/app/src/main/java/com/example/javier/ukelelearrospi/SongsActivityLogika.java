@@ -3,6 +3,7 @@ package com.example.javier.ukelelearrospi;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -90,13 +91,13 @@ public class SongsActivityLogika {
      * @return
      */
     private boolean isSongValid(SongInfo song, String title, String author, int zailtasuna, boolean favorito, boolean pendiente, boolean ikasia){
-        if (title != null && !title.trim().isEmpty()){
-            if (!song.getName().contains(title)){
+        if (title != null && !title.isEmpty()){
+            if (!song.getName().toLowerCase().contains(title.toLowerCase())){
                 return false;
             }
         }
-        if (author != null && !author.trim().isEmpty()){
-            if (!song.getAuthor().contains(author)){
+        if (author != null && !author.isEmpty()){
+            if (!song.getAuthor().toLowerCase().contains(author.toLowerCase())){
                 return false;
             }
         }

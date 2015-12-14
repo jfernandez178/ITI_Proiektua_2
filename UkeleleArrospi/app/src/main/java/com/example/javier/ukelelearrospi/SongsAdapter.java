@@ -1,5 +1,6 @@
 package com.example.javier.ukelelearrospi;
 
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,6 +61,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
 
         public SongViewHolder(View itemView) {
             super(itemView);
+            itemView.setOnClickListener(this);
             zailtasunaView = itemView.findViewById(R.id.song_zailtasuna);
             songName = (TextView) itemView.findViewById(R.id.song_item_name);
             authorName = (TextView) itemView.findViewById(R.id.song_item_author);
@@ -102,6 +104,13 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
             if (view == starView){
                 logika.changeFavorito(songInfo);
                 setSong(songInfo);
+            }else{
+                Fragment fragment = new LearnSongActivity();
+                fragment.setArguments(b);
+                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.content_frame, fragment)
+                        .commit();
             }
         }
     }

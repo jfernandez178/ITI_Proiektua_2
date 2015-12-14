@@ -47,16 +47,17 @@ public class MainActivity extends AppCompatActivity {
     //TODO Hemen doiaz tokatzen dien fragmentak drawerretik. Berri bat gehitzeko menu/drawer.xml gehitu eta jarritako id-akin fragmentua aukeratu
     private void onNavigationMenuItemSelected(MenuItem menuItem){
         Fragment fragment = null;
+        Bundle b = new Bundle();
         switch (menuItem.getItemId()) {
             case R.id.drawer_home:
                 //TODO tokatzen dan fragmentua jarri kasu bakoitzean
                 fragment = null; // fragment = new homeFragment()
                 break;
             case R.id.drawer_main_chords:
-                openChords(null);
                 break;
             case R.id.drawer_main_wikipedia:
-                openWikipedia(null);
+                fragment = new WebViewFragement();
+                b.putString(WebViewFragement.WEB_URL, "http://en.wikipedia.org/wiki/Ukulele");
                 break;
             case R.id.drawer_main_learn:
                 fragment = new SongsActivity();
@@ -78,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         }
         else {
+            fragment.setArguments(b);
             android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
                     .replace(R.id.content_frame, fragment)
@@ -189,14 +191,6 @@ public class MainActivity extends AppCompatActivity {
 	public void openChords(View v) {
 		Intent i = new Intent("assig.app2.learnukulele.ChordsActivity");
 		startActivity(i);
-	}
-	
-	public void openWikipedia(View v) {
-		String url = "http://en.wikipedia.org/wiki/Ukulele";
-		Intent i = new Intent(Intent.ACTION_VIEW);
-		i.setData(Uri.parse(url));
-		startActivity(i);
-		
 	}
 	
 	public void openLearn(View v) {
