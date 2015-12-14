@@ -1,4 +1,9 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,48 +11,140 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".LearnSongActivity" >
+    android:orientation="vertical"
+    tools:context=".LearnSongActivity"
+    android:weightSum="1">
 
-    <TextView android:id="@+id/TextView30" 
-		android:layout_width="wrap_content" 
-		android:layout_height="wrap_content" 
-		android:text="@string/learn_song"
-		android:textSize="24sp" 
-		android:textStyle="bold" />
-    
-    <EditText android:id="@+id/TxtFirst"
-        android:layout_below="@+id/TextView30"
-		android:layout_height="wrap_content" 
-		android:layout_width="match_parent"
-		android:inputType="text"
-		android:text="@string/firstC" 
-		android:textStyle="bold" />
+    <TextView
+        android:layout_width="352dp"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textAbesti" />
+
+    <EditText
+        android:layout_width="355dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/abestiEditatu" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textAutore"
+        android:layout_weight="0.07" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/autoreEditatu" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:weightSum="1">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.04">
+
+            <ImageButton
+                android:layout_width="108dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imageFavritos" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="2.51">
+
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imagePendienteak" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="181dp"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_width="106dp"
+                android:layout_height="match_parent"
+                android:id="@+id/imageIkasiak" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textYoutube"
+        android:layout_weight="0.07" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.07"
+        android:weightSum="1">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
+            android:id="@+id/imageYoutube"
+            android:layout_weight="0.40" />
+
+    </LinearLayout>
 
     <Button
-        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/TxtFirst"
-        android:onClick="openMP3"
-        android:text="@string/button_MP3" />
+        android:text="New Button"
+        android:id="@+id/buttonYoutube"
+        android:layout_weight="0.07" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/textMp3"
+        android:layout_weight="0.07" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.70"
+        android:weightSum="1">
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="130dp"
+            android:id="@+id/imageMp3"
+            android:layout_weight="0.41" />
+    </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TxtFirst"
-        android:layout_marginLeft="47dp"
-        android:layout_toRightOf="@+id/button1"
-        android:onClick="openYOUTUBE"
-        android:text="@string/button_YOUTUBE" />
-    
-    <ImageView
-        android:id="@+id/imageView100"
-        android:contentDescription= "@string/common_chords"
-        android:layout_below="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/hallelujah" />
+        android:text="New Button"
+        android:id="@+id/buttonMp3"
+        android:layout_weight="0.07" />
 
-</RelativeLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Button"
+        android:id="@+id/buttonEguneratu"
+        android:layout_gravity="center_horizontal"
+        android:layout_weight="0.07" />
+
+</LinearLayout>
+
+</ScrollView>
