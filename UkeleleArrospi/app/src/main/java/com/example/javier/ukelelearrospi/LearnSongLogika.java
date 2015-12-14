@@ -58,12 +58,12 @@ public class LearnSongLogika {
 
     //Kantaren informazioa lortzeko metodoa
     public SongInfo kantarenInfoLortu(String kantaIzena){
-        SongInfo kanta = null;
+        SongInfo kanta = new SongInfo();
 
         //Datu basetik lortzen da informazioa kantarena
         Cursor c = db.rawQuery("SELECT * FROM INFOKANTA WHERE kantaIzena='" + kantaIzena + "';", null);
 
-        while(c.moveToFirst()){
+        if(c.moveToFirst()){
             kanta.setMp3(c.getString(2));
             kanta.setYoutube(c.getString(3));
             kanta.setAuthor(c.getString(5));

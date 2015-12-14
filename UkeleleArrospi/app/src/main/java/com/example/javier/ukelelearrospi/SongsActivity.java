@@ -4,6 +4,7 @@ package com.example.javier.ukelelearrospi;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
@@ -68,7 +69,7 @@ public class SongsActivity extends Fragment implements TextWatcher, AdapterView.
         // Zerrenda
         RecyclerView recyclerView = ((RecyclerView) v.findViewById(R.id.recycler_view));
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        adapter = new SongsAdapter(logika);
+        adapter = new SongsAdapter((AppCompatActivity) getActivity(), logika);
         recyclerView.setAdapter(adapter);
 
         // Bilaketa

@@ -9,9 +9,13 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -20,7 +24,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
-public class LearnSongActivity extends Activity implements View.OnClickListener {
+public class LearnSongActivity extends Fragment implements View.OnClickListener {
 
 	private String songName;
 	private String songMP3;
@@ -49,62 +53,41 @@ public class LearnSongActivity extends Activity implements View.OnClickListener 
 	MediaPlayer playSong;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_learn_song);
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.activity_learn_song, container, false);
 		
-		String intent = getIntent().getStringExtra("kantuIzena");
+		String intent = getArguments().getString("kantuIzena");
 
-        buttonEguneratu = (Button) findViewById(R.id.buttonEguneratu);
+        buttonEguneratu = (Button) v.findViewById(R.id.buttonEguneratu);
         buttonEguneratu.setOnClickListener(this);
-        buttonMp3 = (Button) findViewById(R.id.buttonMp3);
+        buttonMp3 = (Button) v.findViewById(R.id.buttonMp3);
         buttonMp3.setOnClickListener(this);
-        buttonYoutube = (Button) findViewById(R.id.buttonYoutube);
+        buttonYoutube = (Button) v.findViewById(R.id.buttonYoutube);
         buttonYoutube.setOnClickListener(this);
-        favoritos = (ImageButton) findViewById(R.id.imageFavritos);
+        favoritos = (ImageButton) v.findViewById(R.id.imageFavritos);
         favoritos.setOnClickListener(this);
-        pendiente = (ImageButton) findViewById(R.id.imagePendienteak);
+        pendiente = (ImageButton) v.findViewById(R.id.imagePendienteak);
         pendiente.setOnClickListener(this);
-        ikasiak = (ImageButton) findViewById(R.id.imageIkasiak);
+        ikasiak = (ImageButton) v.findViewById(R.id.imageIkasiak);
         ikasiak.setOnClickListener(this);
-        kantuIzenaText = (EditText) findViewById(R.id.abestiEditatu);
-        autoreaText = (EditText) findViewById(R.id.autoreEditatu);
-        youtube = (ImageButton) findViewById(R.id.imageYoutube);
+        kantuIzenaText = (EditText) v.findViewById(R.id.abestiEditatu);
+        autoreaText = (EditText) v.findViewById(R.id.autoreEditatu);
+        youtube = (ImageButton) v.findViewById(R.id.imageYoutube);
         youtube.setOnClickListener(this);
-        mp3 = (ImageButton) findViewById(R.id.imageMp3);
+        mp3 = (ImageButton) v.findViewById(R.id.imageMp3);
         mp3.setOnClickListener(this);
 
-        abestia = LearnSongLogika.getLearnSongLogika(getApplicationContext()).kantarenInfoLortu(intent);
+        abestia = LearnSongLogika.getLearnSongLogika(getActivity().getApplicationContext()).kantarenInfoLortu(intent);
 
         //Defektuz, balio zaharrak izango ditu kargatuta
         youtubeBerria = abestia.getYoutube();
         mp3Berria = abestia.getMp3();
 
+		return v;
+	}
+	
 
-                
-		
-	}
-	
-public void openMP3(View v) {
-	
-	switch (indexSong) {
-    case 0:  playSong = MediaPlayer.create(this,
-			R.raw.hallelujah_txiki); break;
-    case 1:  playSong = MediaPlayer.create(this,
-			R.raw.i_shot_the_sheriff_txiki); break;
-    case 2:  playSong = MediaPlayer.create(this,
-			R.raw.i_am_yours_txiki); break;
-    case 3:  playSong = MediaPlayer.create(this,
-			R.raw.let_it_be_txiki); break;
-    case 4:  playSong = MediaPlayer.create(this,
-			R.raw.somewhere_txiki); break;
-    case 5:  playSong = MediaPlayer.create(this,
-			R.raw.sweet_home_txiki); break;   
-}		
-		playSong.start();
-		i=1;
-				
-	}
+
 
 public void openYOUTUBE(View v) {
 	
@@ -121,24 +104,17 @@ public void openYOUTUBE(View v) {
 	
 }
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.learn_song, menu);
-		return true;
-	}
-
     @Override
     public void onClick(View view) {
 
         switch(view.getId()){
             case R.id.buttonMp3:
 
-                AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(this);
+                AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(getActivity());
                 alertDialog2.setTitle("Abestia");
                 alertDialog2.setMessage("URL berria:");
 
-                final EditText input2 = new EditText(this);
+                final EditText input2 = new EditText(getActivity());
                 input2.setText(abestia.getYoutube());
                 LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -168,11 +144,11 @@ public void openYOUTUBE(View v) {
 
             case R.id.buttonYoutube:
 
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
                 alertDialog.setTitle("Tutorial");
                 alertDialog.setMessage("URL berria:");
 
-                final EditText input = new EditText(this);
+                final EditText input = new EditText(getActivity());
                 input.setText(abestia.getYoutube());
                 LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                         LinearLayout.LayoutParams.MATCH_PARENT,
@@ -227,7 +203,8 @@ public void openYOUTUBE(View v) {
                 break;
 
             case R.id.imageMp3:
-                openMP3(null);
+                //TODO
+                // openMP3(null);
                 break;
 
 

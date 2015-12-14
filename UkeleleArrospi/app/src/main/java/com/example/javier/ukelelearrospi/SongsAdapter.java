@@ -1,6 +1,8 @@
 package com.example.javier.ukelelearrospi;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +19,11 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
 
     private ArrayList<SongInfo> kantuak;
     private SongsActivityLogika logika;
+    private AppCompatActivity activity;
 
-    public SongsAdapter(SongsActivityLogika pLogika){
+    public SongsAdapter(AppCompatActivity pActivity, SongsActivityLogika pLogika){
         logika = pLogika;
+        activity = pActivity;
         kantuak = logika.getSongs(null, null, -1, false, false, false);
         setHasStableIds(true);
     }
@@ -58,10 +62,12 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
         private TextView songName;
         private TextView authorName;
         private ImageView starView;
+        private View klikView;
 
         public SongViewHolder(View itemView) {
             super(itemView);
-            itemView.setOnClickListener(this);
+            klikView = itemView.findViewById(R.id.item_klikatu);
+            klikView.setOnClickListener(this);
             zailtasunaView = itemView.findViewById(R.id.song_zailtasuna);
             songName = (TextView) itemView.findViewById(R.id.song_item_name);
             authorName = (TextView) itemView.findViewById(R.id.song_item_author);
@@ -106,8 +112,10 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
                 setSong(songInfo);
             }else{
                 Fragment fragment = new LearnSongActivity();
+                Bundle b = new Bundle();
+                b.putString("kantuIzena", songInfo.getName());
                 fragment.setArguments(b);
-                android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+                android.support.v4.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.content_frame, fragment)
                         .commit();
