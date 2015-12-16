@@ -64,6 +64,7 @@ public class LearnSongLogika {
         Cursor c = db.rawQuery("SELECT * FROM INFOKANTA WHERE kantaIzena='" + kantaIzena + "';", null);
 
         if(c.moveToFirst()){
+            kanta.setName(kantaIzena);
             kanta.setMp3(c.getString(2));
             kanta.setYoutube(c.getString(3));
             kanta.setAuthor(c.getString(5));

@@ -16,6 +16,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -35,17 +38,21 @@ public class LearnSongActivity extends Fragment implements View.OnClickListener 
     private Button buttonEguneratu;
     private Button buttonYoutube;
     private Button buttonMp3;
-    private ImageButton favoritos;
-    private ImageButton pendiente;
-    private ImageButton ikasiak;
+    private ImageView favoritos;
+    private ImageView pendiente;
+    private ImageView ikasiak;
     private EditText kantuIzenaText;
     private EditText autoreaText;
-    private ImageButton youtube;
+    private WebView youtube;
     private ImageButton mp3;
 
     private String youtubeBerria;
     private SongInfo abestia;
     private String mp3Berria;
+
+    private boolean favoritosBoolean;
+    private boolean pendienteBoolean;
+    private boolean aprendidoBoolean;
 
 	
 	ImageView image;
@@ -58,21 +65,23 @@ public class LearnSongActivity extends Fragment implements View.OnClickListener 
 		
 		String intent = getArguments().getString("kantuIzena");
 
+
+
         buttonEguneratu = (Button) v.findViewById(R.id.buttonEguneratu);
         buttonEguneratu.setOnClickListener(this);
         buttonMp3 = (Button) v.findViewById(R.id.buttonMp3);
         buttonMp3.setOnClickListener(this);
         buttonYoutube = (Button) v.findViewById(R.id.buttonYoutube);
         buttonYoutube.setOnClickListener(this);
-        favoritos = (ImageButton) v.findViewById(R.id.imageFavritos);
+        favoritos = (ImageView) v.findViewById(R.id.imageFavritos);
         favoritos.setOnClickListener(this);
-        pendiente = (ImageButton) v.findViewById(R.id.imagePendienteak);
+        pendiente = (ImageView) v.findViewById(R.id.imagePendienteak);
         pendiente.setOnClickListener(this);
-        ikasiak = (ImageButton) v.findViewById(R.id.imageIkasiak);
+        ikasiak = (ImageView) v.findViewById(R.id.imageIkasiak);
         ikasiak.setOnClickListener(this);
         kantuIzenaText = (EditText) v.findViewById(R.id.abestiEditatu);
         autoreaText = (EditText) v.findViewById(R.id.autoreEditatu);
-        youtube = (ImageButton) v.findViewById(R.id.imageYoutube);
+        youtube = (WebView) v.findViewById(R.id.imageYoutube);
         youtube.setOnClickListener(this);
         mp3 = (ImageButton) v.findViewById(R.id.imageMp3);
         mp3.setOnClickListener(this);
@@ -83,24 +92,28 @@ public class LearnSongActivity extends Fragment implements View.OnClickListener 
         youtubeBerria = abestia.getYoutube();
         mp3Berria = abestia.getMp3();
 
+        kantuIzenaText.setText(abestia.getName());
+        autoreaText.setText(abestia.getAuthor());
+        openYOUTUBE();
+
+
+
 		return v;
 	}
 	
 
 
 
-public void openYOUTUBE(View v) {
-	
-	String url = songYOUTUBE;
-	
-	if (i==1){
-		i=0;
-		playSong.stop();
-		}
-	
-	Intent i = new Intent(Intent.ACTION_VIEW);
-	i.setData(Uri.parse(url));
-	startActivity(i);
+public void openYOUTUBE() {
+	String BASE_URL_YOUTUBE = "https://www.youtube.com/embed/";
+    String loadUrl;
+	if (youtubeBerria != null && !youtubeBerria.isEmpty() && youtubeBerria.contains("=")){
+        loadUrl = BASE_URL_YOUTUBE + youtubeBerria.split("=")[1];
+        youtube.setWebViewClient(new WebViewClient());
+        WebSettings webSettings = youtube.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        youtube.loadUrl(loadUrl);
+    }
 	
 }
 
@@ -162,6 +175,7 @@ public void openYOUTUBE(View v) {
                             public void onClick(DialogInterface dialog, int which) {
                                 youtubeBerria = input.getText().toString();
                                 dialog.cancel();
+                                openYOUTUBE();
                             }
                         });
 
@@ -185,22 +199,34 @@ public void openYOUTUBE(View v) {
 
 
             case R.id.imageFavritos:
-                //TODO:ANDER
+                favoritosBoolean = !favoritosBoolean;
+                if (favoritosBoolean){
+                    favoritos.setImageResource(R.drawable.ic_star_24dp);
+                }else{
+                    favoritos.setImageResource(R.drawable.ic_star_outline_24dp);
+                }
                 break;
 
 
             case R.id.imagePendienteak:
-                //TODO:ANDER
+                pendienteBoolean = !pendienteBoolean;
+                if (pendienteBoolean){
+                    pendiente.setImageResource(R.drawable.ic_query_builder_select);
+                }else{
+                    pendiente.setImageResource(R.drawable.ic_query_builder_24dp);
+                }
                 break;
 
 
             case R.id.imageIkasiak:
-                //TODO:ANDER
+                aprendidoBoolean = !aprendidoBoolean;
+                if (aprendidoBoolean){
+                    ikasiak.setImageResource(R.drawable.ic_done_all_aukeratuta);
+                }else{
+                    ikasiak.setImageResource(R.drawable.ic_done_all_24dp);
+                }
                 break;
 
-            case R.id.imageYoutube:
-                openYOUTUBE(null);
-                break;
 
             case R.id.imageMp3:
                 //TODO

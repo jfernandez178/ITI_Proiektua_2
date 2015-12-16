@@ -78,7 +78,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
         public void setSong(SongInfo info){
             songInfo = info;
             songName.setText(info.getName());
-            authorName.setText(info.getName());
+            authorName.setText(info.getAuthor());
             if (info.isFavorito()){
                 starView.setImageResource(R.drawable.ic_star_24dp);
             }else{
@@ -117,6 +117,7 @@ public class SongsAdapter extends RecyclerView.Adapter<SongsAdapter.SongViewHold
                 fragment.setArguments(b);
                 android.support.v4.app.FragmentManager fragmentManager = activity.getSupportFragmentManager();
                 fragmentManager.beginTransaction()
+                        .addToBackStack("UkeleleSong")
                         .replace(R.id.content_frame, fragment)
                         .commit();
             }

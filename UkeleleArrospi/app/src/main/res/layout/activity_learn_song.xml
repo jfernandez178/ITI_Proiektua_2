@@ -18,7 +18,7 @@
     <TextView
         android:layout_width="352dp"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="@string/titulo"
         android:id="@+id/textAbesti" />
 
     <EditText
@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="@string/autor"
         android:id="@+id/textAutore"
         android:layout_weight="0.07" />
 
@@ -50,9 +50,10 @@
             android:layout_height="match_parent"
             android:layout_weight="0.04">
 
-            <ImageButton
+            <ImageView
                 android:layout_width="108dp"
                 android:layout_height="match_parent"
+                android:src="@drawable/ic_star_outline_24dp"
                 android:id="@+id/imageFavritos" />
         </LinearLayout>
 
@@ -62,10 +63,11 @@
             android:layout_height="match_parent"
             android:layout_weight="2.51">
 
-            <ImageButton
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/imagePendienteak" />
+                android:id="@+id/imagePendienteak"
+                android:src="@drawable/ic_query_builder_24dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -73,46 +75,47 @@
             android:layout_width="181dp"
             android:layout_height="match_parent">
 
-            <ImageButton
+            <ImageView
                 android:layout_width="106dp"
                 android:layout_height="match_parent"
-                android:id="@+id/imageIkasiak" />
+                android:id="@+id/imageIkasiak"
+                android:src="@drawable/ic_done_all_24dp"/>
         </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="@string/youtube"
         android:id="@+id/textYoutube"
         android:layout_weight="0.07" />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="240dp"
         android:layout_weight="0.07"
         android:weightSum="1">
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="130dp"
-            android:id="@+id/imageYoutube"
-            android:layout_weight="0.40" />
+
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:id="@+id/imageYoutube" />
 
     </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
+        android:layout_height="40dp"
+        android:text="@string/aldatu"
         android:id="@+id/buttonYoutube"
         android:layout_weight="0.07" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="@string/abestia"
         android:id="@+id/textMp3"
         android:layout_weight="0.07" />
 
@@ -124,7 +127,7 @@
         android:weightSum="1">
 
         <ImageButton
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="130dp"
             android:id="@+id/imageMp3"
             android:layout_weight="0.41" />
@@ -132,17 +135,16 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
+        android:layout_height="40dp"
+        android:text="@string/aldatu"
         android:id="@+id/buttonMp3"
         android:layout_weight="0.07" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="@string/guardar"
         android:id="@+id/buttonEguneratu"
-        android:layout_gravity="center_horizontal"
         android:layout_weight="0.07" />
 
 </LinearLayout>

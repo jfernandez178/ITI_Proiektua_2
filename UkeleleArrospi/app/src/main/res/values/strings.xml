@@ -36,6 +36,14 @@
     <string name="pendiente">Ikasteko</string>
     <string name="ikasiak">Ikasiak</string>
 
+    <string name="youtube">Youtube</string>
+
+    <string name="abestia">Abestia</string>
+
+    <string name="aldatu">Aldatu</string>
+
+    <string name="guardar">Gorde</string>
+
     <string-array name="zailtasuna">
         <item>Edozein</item>
         <item>Erreza</item>

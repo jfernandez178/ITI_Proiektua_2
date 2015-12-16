@@ -134,6 +134,7 @@ public class DatuBasea extends SQLiteOpenHelper {
             "SWEET HOME ALABAMA",
                      };
 
+*/
     String[] songsYoutube = {
             "http://www.youtube.com/watch?v=XzOdXhywIbo",
             "http://www.youtube.com/watch?v=IzTgYrnhYhs",
@@ -142,11 +143,11 @@ public class DatuBasea extends SQLiteOpenHelper {
             "http://www.youtube.com/watch?v=1PiscVZSuEE",
             "http://www.youtube.com/watch?v=LDCzpvvSvjY",
                      };
-     */
+
 
     private void datuBaseanKantuakSartu(SQLiteDatabase db){
         for (int i=0; i < songs.length; i++){
-            db.execSQL("INSERT INTO INFOKANTA VALUES ('"+songs[i]+"', '', '"+songs[i]+"', 'http://www.youtube.com/watch?v=XzOdXhywIbo', "+(i % 4)+", 'Ander', 138)");
+            db.execSQL("INSERT INTO INFOKANTA VALUES ('"+songs[i]+"', '', '"+songs[i]+"', '"+songsYoutube[i]+"', "+(i % 4)+", 'Ander', 138)");
         }
     }
 
