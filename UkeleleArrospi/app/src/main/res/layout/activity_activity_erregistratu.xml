@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="com.example.javier.ukelelearrospi.ActivityErregistratu"
     android:weightSum="1"
-    android:background="@drawable/backgr_register">
+    android:background="@drawable/backgr_registerr">
 
     <LinearLayout
         android:orientation="horizontal"
