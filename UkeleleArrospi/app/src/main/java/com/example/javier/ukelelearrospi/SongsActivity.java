@@ -1,7 +1,11 @@
 package com.example.javier.ukelelearrospi;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +23,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class SongsActivity extends Fragment implements TextWatcher, AdapterView.OnItemClickListener, CompoundButton.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
 
     private SongsActivityLogika logika;
@@ -33,6 +40,10 @@ public class SongsActivity extends Fragment implements TextWatcher, AdapterView.
     private CheckBox favorito;
     private CheckBox pendiente;
     private CheckBox ikasia;
+    private SpeechRecognizer mikrofonoa;
+    private Intent mikrofIntent;
+    private ArrayList<String> mezua;
+    private boolean mikroTitle;
 
 
     @Override
@@ -78,6 +89,36 @@ public class SongsActivity extends Fragment implements TextWatcher, AdapterView.
         autor = (EditText) v.findViewById(R.id.autor_edit_text);
         autor.addTextChangedListener(this);
 
+        //mikrofonoa
+        mikrofonoa=SpeechRecognizer.createSpeechRecognizer(getActivity());
+        mikrofIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        mikrofIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        mikrofIntent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, getActivity().getPackageName());
+        final SpeechRecognitionListener listener = new SpeechRecognitionListener();
+        mikrofonoa.setRecognitionListener(listener);
+
+        v.findViewById(R.id.songs_search_edit_text).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                {
+                    mikrofonoa.startListening(mikrofIntent);
+                    mikroTitle = true;
+                }
+            }
+        });
+
+        v.findViewById(R.id.autor_edit_text).setOnClickListener(new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                {
+                    mikrofonoa.startListening(mikrofIntent);
+                    mikroTitle = false;
+                }
+            }
+        });
+
+
+
         v.findViewById(R.id.zabalduItxiAdvanced).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -119,7 +160,7 @@ public class SongsActivity extends Fragment implements TextWatcher, AdapterView.
     public void bilaketa(){
         String titulo = searchEditText.getText().toString();
         String autorText = autor.getText().toString();
-        adapter.setSongs(logika.getSongs(titulo, autorText, zailtasuna.getSelectedItemPosition()-1, favorito.isChecked(), pendiente.isChecked(), ikasia.isChecked()));
+        adapter.setSongs(logika.getSongs(titulo, autorText, zailtasuna.getSelectedItemPosition() - 1, favorito.isChecked(), pendiente.isChecked(), ikasia.isChecked()));
     }
 
     @Override
@@ -141,4 +182,97 @@ public class SongsActivity extends Fragment implements TextWatcher, AdapterView.
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
+
+    //recognition klasea
+    protected class SpeechRecognitionListener implements RecognitionListener
+    {
+
+        @Override
+        public void onBeginningOfSpeech()
+        {
+            //Log.d(TAG, "onBeginingOfSpeech");
+        }
+
+        @Override
+        public void onBufferReceived(byte[] buffer)
+        {
+
+        }
+
+        @Override
+        public void onEndOfSpeech()
+        {
+            //Log.d(TAG, "onEndOfSpeech");
+            mikrofonoa.stopListening();
+        }
+
+        @Override
+        public void onError(int error)
+        {
+            mikrofonoa.startListening(mikrofIntent);
+
+            //Log.d(TAG, "error = " + error);
+        }
+
+        @Override
+        public void onEvent(int eventType, Bundle params)
+        {
+
+        }
+
+        @Override
+        public void onPartialResults(Bundle partialResults)
+        {
+
+        }
+
+        @Override
+        public void onReadyForSpeech(Bundle params)
+        {
+            //Log.d(TAG, "onReadyForSpeech"); //$NON-NLS-1$
+        }
+
+        @Override
+        public void onResults(Bundle results)
+        {
+            //Log.d(TAG, "onResults"); //$NON-NLS-1$
+            int max=0;
+            ArrayList<SongInfo> aux;
+            String auxString;
+            String maxString="";
+            mezua = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+            Iterator<String> itr = mezua.iterator();
+
+            if(mikroTitle){
+                while(itr.hasNext()){
+                    auxString = itr.next();
+                    aux = logika.getSongs(auxString, "", zailtasuna.getSelectedItemPosition() - 1, favorito.isChecked(), pendiente.isChecked(), ikasia.isChecked());
+                    if(aux.size()>=max){
+                        max = aux.size();
+                        maxString = auxString;
+                    }
+                }
+                searchEditText.setText(maxString);
+            }else{
+                while(itr.hasNext()){
+                    auxString = itr.next();
+                    aux = logika.getSongs("", auxString, zailtasuna.getSelectedItemPosition() - 1, favorito.isChecked(), pendiente.isChecked(), ikasia.isChecked());
+                    if(aux.size()>=max){
+                        max = aux.size();
+                        maxString = auxString;
+                    }
+                }
+                autor.setText(maxString);
+            }
+
+            // matches are the return values of speech recognition engine
+            // Use these values for whatever you wish to do
+        }
+
+        @Override
+        public void onRmsChanged(float rmsdB)
+        {
+        }
+    }
+
 }
