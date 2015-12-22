@@ -7,6 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:id="@+id/imageView"
-        android:src="@drawable/ukelele"
+        android:src="@drawable/ukeleler"
         android:scaleType="centerCrop"/>
 </LinearLayout>
