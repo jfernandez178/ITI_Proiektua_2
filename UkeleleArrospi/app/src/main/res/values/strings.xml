@@ -43,6 +43,10 @@
     <string name="aldatu">Aldatu</string>
 
     <string name="guardar">Gorde</string>
+    <string name="erabiltzaile">Usuario</string>
+    <string name="password">Contraseña</string>
+    <string name="password_confirm">Confirmar Contraseña</string>
+    <string name="erregistratu">Regisrarse</string>
 
     <string-array name="zailtasuna">
         <item>Edozein</item>
