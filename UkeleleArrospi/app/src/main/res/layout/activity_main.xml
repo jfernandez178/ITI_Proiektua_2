@@ -21,7 +21,32 @@
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/backgr_mainr" />
+            android:background="@drawable/backgr_mainr" >
+
+            <EditText
+                android:layout_width="270dp"
+                android:layout_height="410dp"
+                android:id="@+id/editOngiEtorri"
+                android:layout_gravity="left|bottom"
+                android:background="#ad5c5c5c"
+                android:layout_margin="@dimen/abc_action_bar_content_inset_material"
+                android:text="@string/ongi_etorri_text"
+                android:gravity="fill_horizontal|fill_vertical|fill"
+                android:editable="false"
+                android:enabled="true"
+                android:focusable="false" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="@string/ongi_etorri_title"
+                android:id="@+id/viewOngiEtorri"
+                android:layout_gravity="center_horizontal|top"
+                android:gravity="center_vertical|center_horizontal"
+                android:textStyle="bold" />
+        </FrameLayout>
 
     </RelativeLayout>
 

@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 
 import java.io.Serializable;
 
@@ -24,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private NavigationView navigationView;
     private ActionBarDrawerToggle mDrawerToggle;
+    private EditText meditTExt;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        meditTExt = (EditText) findViewById(R.id.editOngiEtorri);
+        meditTExt.setKeyListener(null);
+
 
         drawerraKudeatu();
 

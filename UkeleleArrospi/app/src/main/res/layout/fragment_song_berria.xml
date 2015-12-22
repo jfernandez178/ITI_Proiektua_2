@@ -3,7 +3,8 @@
     android:layout_height="match_parent"
     tools:context="com.example.javier.ukelelearrospi.SongBerriaFragment"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="@drawable/backgr_newsongr">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -15,7 +16,7 @@
     <TextView
         android:layout_width="177dp"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="@string/abestia"
         android:id="@+id/textKantuIzena"
         android:layout_weight="0.11" />
 
@@ -27,7 +28,7 @@
     <TextView
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="@string/autor"
         android:id="@+id/textAutoreIzena"
         android:layout_weight="0.11" />
 
@@ -39,7 +40,7 @@
     <TextView
         android:layout_width="194dp"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="@string/string_youtube"
         android:id="@+id/textYoutube"
         android:layout_weight="0.17" />
 
@@ -51,7 +52,7 @@
     <TextView
         android:layout_width="210dp"
         android:layout_height="64dp"
-        android:text="New Text"
+        android:text="@string/string_mp3"
         android:id="@+id/textMP3" />
 
     <EditText
@@ -62,28 +63,28 @@
     <TextView
         android:layout_width="210dp"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="@string/akordeak"
         android:id="@+id/textAkordeak"
         android:layout_weight="0.08" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
+        android:text="@string/aukeratutako_akordeak"
         android:id="@+id/textAukeratutakoAkordeak"
         android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="@string/aukeratu_akorde"
         android:id="@+id/buttonAkordeakAukeratu"
         android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="@string/kantua_sortu"
         android:id="@+id/buttonKantuaSortu"
         android:layout_gravity="center_horizontal" />
 

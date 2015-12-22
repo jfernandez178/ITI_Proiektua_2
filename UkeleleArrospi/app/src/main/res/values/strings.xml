@@ -38,7 +38,7 @@
 
     <string name="youtube">Youtube</string>
 
-    <string name="abestia">Abestia</string>
+    <string name="abestia">Canción</string>
 
     <string name="aldatu">Aldatu</string>
 
@@ -47,6 +47,14 @@
     <string name="password">Contraseña</string>
     <string name="password_confirm">Confirmar Contraseña</string>
     <string name="erregistratu">Regisrarse</string>
+    <string name="string_mp3">Audio MP3</string>
+    <string name="string_youtube">youtube</string>
+    <string name="akordeak">Acordes</string>
+    <string name="aukeratu_akorde">Escoge Acorde</string>
+    <string name="kantua_sortu">Crear Canción</string>
+    <string name="aukeratutako_akordeak">Acordes Seleccionados</string>
+    <string name="ongi_etorri_title">Bienvenido a Learn Ukelele</string>
+    <string name="ongi_etorri_text">Hola\n\n\tAquí podras encontrar todas las herramientas que necesites para convertirte en un maestro del ukelele.\n\n Ya seas alguien que acaba de empezar, con nociones básicas o todo un experto, te ofrecemos toda la ayuda que necesites mediante esta aplicación.\n\n\tPara empezar no tienes mas que arrastras el panel izquierdo para mostrar el menú, o pulsar en el icono en la esquina superior izquierda.</string>
 
     <string-array name="zailtasuna">
         <item>Edozein</item>
