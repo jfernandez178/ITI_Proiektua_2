@@ -16,6 +16,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.io.Serializable;
+
 public class MainActivity extends AppCompatActivity {
 
 
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 fragment = null; // fragment = new homeFragment()
                 break;
             case R.id.drawer_main_chords:
+                fragment = new ChordsActivity();
                 break;
             case R.id.drawer_main_wikipedia:
                 fragment = new WebViewFragement();

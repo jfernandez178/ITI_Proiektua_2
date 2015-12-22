@@ -3,6 +3,7 @@ package com.example.javier.ukelelearrospi;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
-public class ActivityErregistratu extends ActionBarActivity implements View.OnClickListener {
+public class ActivityErregistratu extends AppCompatActivity implements View.OnClickListener {
 
     private Button botonErregistratu;
     private EditText usernameText;
@@ -36,6 +37,13 @@ public class ActivityErregistratu extends ActionBarActivity implements View.OnCl
 
     }
 
+
+
+    public void onStop() {
+        Intent i = new Intent(getBaseContext(), Login.class);
+        startActivity(i);
+        super.onStop();
+    }
 
 
     @Override
