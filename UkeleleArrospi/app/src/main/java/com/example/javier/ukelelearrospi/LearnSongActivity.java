@@ -24,15 +24,13 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
 public class LearnSongActivity extends Fragment implements View.OnClickListener {
 
-	private String songName;
-	private String songMP3;
-	private String songYOUTUBE;
-	int indexSong;
+
 	int i=0;
 
     private Button buttonEguneratu;
@@ -41,30 +39,22 @@ public class LearnSongActivity extends Fragment implements View.OnClickListener 
     private ImageView favoritos;
     private ImageView pendiente;
     private ImageView ikasiak;
-    private EditText kantuIzenaText;
+    private TextView kantuIzenaText;
     private EditText autoreaText;
     private WebView youtube;
-    private ImageButton mp3;
+    private WebView mp3;
 
     private String youtubeBerria;
     private SongInfo abestia;
     private String mp3Berria;
 
-    private boolean favoritosBoolean;
-    private boolean pendienteBoolean;
-    private boolean aprendidoBoolean;
 
-	
-	ImageView image;
-	
-	MediaPlayer playSong;
-	
-	@Override
+
+    @Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.activity_learn_song, container, false);
 		
 		String intent = getArguments().getString("kantuIzena");
-
 
 
         buttonEguneratu = (Button) v.findViewById(R.id.buttonEguneratu);
@@ -79,12 +69,10 @@ public class LearnSongActivity extends Fragment implements View.OnClickListener 
         pendiente.setOnClickListener(this);
         ikasiak = (ImageView) v.findViewById(R.id.imageIkasiak);
         ikasiak.setOnClickListener(this);
-        kantuIzenaText = (EditText) v.findViewById(R.id.abestiEditatu);
+        kantuIzenaText = (TextView) v.findViewById(R.id.abestiEditatu);
         autoreaText = (EditText) v.findViewById(R.id.autoreEditatu);
         youtube = (WebView) v.findViewById(R.id.imageYoutube);
-        youtube.setOnClickListener(this);
-        mp3 = (ImageButton) v.findViewById(R.id.imageMp3);
-        mp3.setOnClickListener(this);
+        mp3 = (WebView) v.findViewById(R.id.imageMp3);
 
         abestia = LearnSongLogika.getLearnSongLogika(getActivity().getApplicationContext()).kantarenInfoLortu(intent);
 
@@ -95,27 +83,53 @@ public class LearnSongActivity extends Fragment implements View.OnClickListener 
         kantuIzenaText.setText(abestia.getName());
         autoreaText.setText(abestia.getAuthor());
         openYOUTUBE();
+        openMp3();
 
+        if (abestia.isFavorito()){
+            favoritos.setImageResource(R.drawable.ic_star_24dp);
+        }else{
+            favoritos.setImageResource(R.drawable.ic_star_outline_24dp);
+        }
 
+        if (abestia.isPendiente()){
+            pendiente.setImageResource(R.drawable.ic_query_builder_select);
+        }else{
+            pendiente.setImageResource(R.drawable.ic_query_builder_24dp);
+        }
+
+        if (abestia.isIkasia()){
+            ikasiak.setImageResource(R.drawable.ic_done_all_aukeratuta);
+        }else{
+            ikasiak.setImageResource(R.drawable.ic_done_all_24dp);
+        }
 
 		return v;
 	}
-	
 
 
 
-public void openYOUTUBE() {
-	String BASE_URL_YOUTUBE = "https://www.youtube.com/embed/";
-    String loadUrl;
-	if (youtubeBerria != null && !youtubeBerria.isEmpty() && youtubeBerria.contains("=")){
-        loadUrl = BASE_URL_YOUTUBE + youtubeBerria.split("=")[1];
-        youtube.setWebViewClient(new WebViewClient());
-        WebSettings webSettings = youtube.getSettings();
-        webSettings.setJavaScriptEnabled(true);
-        youtube.loadUrl(loadUrl);
+
+    public void openYOUTUBE() {
+        baseOpenYoutube(youtube, youtubeBerria);
     }
-	
-}
+
+    public void openMp3(){
+        baseOpenYoutube(mp3, mp3Berria);
+    }
+
+    private void baseOpenYoutube(WebView webView, String youtubeBerria){
+        String BASE_URL_YOUTUBE = "https://www.youtube.com/embed/";
+        String loadUrl;
+        if (youtubeBerria != null && !youtubeBerria.isEmpty() && youtubeBerria.contains("=")){
+            loadUrl = BASE_URL_YOUTUBE + youtubeBerria.split("=")[1];
+            webView.setWebViewClient(new WebViewClient());
+            WebSettings webSettings = webView.getSettings();
+            webSettings.setJavaScriptEnabled(true);
+            webView.loadUrl(loadUrl);
+        }
+    }
+
+
 
     @Override
     public void onClick(View view) {
@@ -140,6 +154,7 @@ public void openYOUTUBE() {
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 mp3Berria = input2.getText().toString();
+                                openMp3();
                                 dialog.cancel();
                             }
                         });
@@ -193,14 +208,12 @@ public void openYOUTUBE() {
                 break;
 
             case R.id.buttonEguneratu:
-                //TODO: Informazioa eguneratuko da: ANDER
-
+                LearnSongLogika.getLearnSongLogika(getActivity()).cambiarInformación(kantuIzenaText.getText().toString(), autoreaText.getText().toString(), mp3Berria, youtubeBerria);
                 break;
 
-
             case R.id.imageFavritos:
-                favoritosBoolean = !favoritosBoolean;
-                if (favoritosBoolean){
+                LearnSongLogika.getLearnSongLogika(getActivity()).changeFavorito(abestia);
+                if (abestia.isFavorito()){
                     favoritos.setImageResource(R.drawable.ic_star_24dp);
                 }else{
                     favoritos.setImageResource(R.drawable.ic_star_outline_24dp);
@@ -209,8 +222,8 @@ public void openYOUTUBE() {
 
 
             case R.id.imagePendienteak:
-                pendienteBoolean = !pendienteBoolean;
-                if (pendienteBoolean){
+                LearnSongLogika.getLearnSongLogika(getActivity()).changePendiente(abestia);
+                if (abestia.isPendiente()){
                     pendiente.setImageResource(R.drawable.ic_query_builder_select);
                 }else{
                     pendiente.setImageResource(R.drawable.ic_query_builder_24dp);
@@ -219,23 +232,13 @@ public void openYOUTUBE() {
 
 
             case R.id.imageIkasiak:
-                aprendidoBoolean = !aprendidoBoolean;
-                if (aprendidoBoolean){
+                LearnSongLogika.getLearnSongLogika(getActivity()).changeIkasia(abestia);
+                if (abestia.isIkasia()){
                     ikasiak.setImageResource(R.drawable.ic_done_all_aukeratuta);
                 }else{
                     ikasiak.setImageResource(R.drawable.ic_done_all_24dp);
                 }
                 break;
-
-
-            case R.id.imageMp3:
-                //TODO
-                // openMP3(null);
-                break;
-
-
-
-
 
         }
 

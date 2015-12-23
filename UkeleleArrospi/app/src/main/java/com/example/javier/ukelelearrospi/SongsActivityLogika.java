@@ -31,8 +31,8 @@ public class SongsActivityLogika {
         while(c.moveToNext()){
             SongInfo info = new SongInfo();
             info.setName(c.getString(0));
-            info.setAuthor(c.getString(5));
-            info.setZailtasuna(c.getInt(4));
+            info.setAuthor(c.getString(4));
+            info.setZailtasuna(c.getInt(3));
             Cursor c2 = db.rawQuery("SELECT * FROM FAVORITOS WHERE username='"+username+"' AND kantaIzena='"+c.getString(0)+"'" , null);
             if (c2.moveToFirst()){
                 info.setFavorito(true);

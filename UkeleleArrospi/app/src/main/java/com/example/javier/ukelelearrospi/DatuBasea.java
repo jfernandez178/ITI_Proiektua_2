@@ -48,7 +48,6 @@ public class DatuBasea extends SQLiteOpenHelper {
 
         db.execSQL( "CREATE TABLE INFOKANTA(" +
                 " kantaIzena TEXT PRIMARY KEY," +
-                " pathIrudia TEXT," +
                 " pathKanta TEXT NOT NULL," +
                 " pathYoutube TEXT NOT NULL," +
                 " zailtasunMaila INTEGER NOT NULL," +
@@ -113,29 +112,23 @@ public class DatuBasea extends SQLiteOpenHelper {
 
 
     String[] songs = {
-            "HALLELUJAH",
-            "I SHOT THE SHERIFF",
-            "I AM YOURS",
-            "LET IT BE",
-            "SOMEWHERE OVER THE RAINBOW",
-            "SWEET HOME ALABAMA",
+            "Livin la Vida Loca",
+            "Holding out for a hero",
+            "Accidentally In Love",
+            "I am a beleiver",
+            "Hallelujah",
+            "I shot the sheriff",
+            "I am yours",
+            "Let it be",
+            "Somewhere over the rainbow",
+            "Sweet home Alabama",
     };
 
-    /*
-
-
-
-    String[] songsMp3 = {
-            "HALLELUJAH-MP3",
-            "I SHOT THE SHERIFF",
-            "I AM YOURS",
-            "LET IT BE",
-            "SOMEWHERE OVER THE RAINBOW",
-            "SWEET HOME ALABAMA",
-                     };
-
-*/
     String[] songsYoutube = {
+            "https://www.youtube.com/watch?v=dSeJiVeG360",
+            "https://www.youtube.com/watch?v=p3kuqTagIXo",
+            "https://www.youtube.com/watch?v=RS8b2BFPLoM",
+            "https://www.youtube.com/watch?v=Un7PDHXBovk",
             "http://www.youtube.com/watch?v=XzOdXhywIbo",
             "http://www.youtube.com/watch?v=IzTgYrnhYhs",
             "http://www.youtube.com/watch?v=1VyPSzbe_x0",
@@ -144,10 +137,36 @@ public class DatuBasea extends SQLiteOpenHelper {
             "http://www.youtube.com/watch?v=LDCzpvvSvjY",
                      };
 
+    String[] songsMP3 = {
+            "https://www.youtube.com/watch?v=SXUG9zTpI_w",
+            "https://www.youtube.com/watch?v=puTtnqoqHLQ",
+            "https://www.youtube.com/watch?v=-04HvEXXlfo",
+            "https://www.youtube.com/watch?v=SK919-tsPCw",
+            "https://www.youtube.com/watch?v=v4tYJdDj3_8",
+            "https://www.youtube.com/watch?v=10qLYy6hiFQ",
+            "https://www.youtube.com/watch?v=Qr6Ty3C3aMs", 
+            "https://www.youtube.com/watch?v=ybb6HPDENnE",
+            "https://www.youtube.com/watch?v=V1bFr2SWP1I",
+            "https://www.youtube.com/watch?v=li1Rqo2UC88",
+    };
+
+    String[] authors = {
+            "Ricky Martin",
+            "Bonnie Tyler",
+            "Counting Crows",
+            "The Monkees",
+            "Leonard Cohen",
+            "Eric Clapton",
+            "Jason Mraz",
+            "The Beatles",
+            "Israel Kamakawiwo",
+            "Lynyrd Skynyrd",
+    };
+
 
     private void datuBaseanKantuakSartu(SQLiteDatabase db){
         for (int i=0; i < songs.length; i++){
-            db.execSQL("INSERT INTO INFOKANTA VALUES ('"+songs[i]+"', '', '"+songs[i]+"', '"+songsYoutube[i]+"', "+(i % 4)+", 'Ander', 138)");
+            db.execSQL("INSERT INTO INFOKANTA VALUES ('"+songs[i]+"', '"+songsMP3[i]+"', '"+songsYoutube[i]+"', "+(i % 4)+", '"+authors[i]+"', 138)");
         }
     }
 
