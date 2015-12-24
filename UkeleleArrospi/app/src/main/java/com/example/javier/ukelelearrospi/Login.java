@@ -139,7 +139,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener, Te
                 break;
             case R.id.botonRegistrar:
                 //Erregistratzeko pantaila irekiko da.
-                finish();
+                //finish();
                 Intent i = new Intent(getBaseContext(), ActivityErregistratu.class);
                 startActivity(i);
                 break;

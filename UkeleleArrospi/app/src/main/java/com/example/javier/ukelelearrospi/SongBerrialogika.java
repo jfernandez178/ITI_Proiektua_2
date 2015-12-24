@@ -3,6 +3,7 @@ package com.example.javier.ukelelearrospi;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -49,13 +50,15 @@ public class SongBerrialogika {
 
         if(!c.moveToFirst()){
             //Ez baldin bada existitzen kanturik izen horrekin sortu egingo da
-            db.execSQL("INSERT INTO INFOKANTA (kantaIzena, egilea, pathKanta, pathYoutube) values('" + kantuIzena + "', '" + autorea + "', '" + mp3 + "', '" + youtube + "')", null);
+            db.execSQL("INSERT INTO INFOKANTA (kantaIzena, egilea, pathKanta, pathYoutube) values('" + kantuIzena + "', '" + autorea + "', '" + mp3 + "', '" + youtube + "')");
             //Gainera, akordeak eta kantuak lotu behar dira
             String[] akordeakLista = lortuAkordeak(akordeak);
             for(int i = 0; i < akordeakLista.length; i++){
-                db.execSQL("INSERT INTO KANTAAKORDE values('" + kantuIzena + "', '" + akordeakLista[i] + "');", null);
-            }
+                db.execSQL("INSERT INTO KANTAAKORDE values('" + kantuIzena + "', '" + akordeakLista[i] + "');");
+                Log.i("query", "INSERT INTO KANTAAKORDE values('" + kantuIzena + "', '" + akordeakLista[i] + "');");
 
+            }
+            ondoSortuDa = true;
         }
 
         return ondoSortuDa;

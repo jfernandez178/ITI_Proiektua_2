@@ -6,6 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,21 +21,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link SongBerriaFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link SongBerriaFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class SongBerriaFragment extends Fragment implements View.OnClickListener {
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    private String mParam1;
-    private String mParam2;
+public class SongBerriaFragment extends AppCompatActivity implements View.OnClickListener {
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
     private EditText kantuaIzenaText;
     private EditText autoreaText;
@@ -52,22 +42,7 @@ public class SongBerriaFragment extends Fragment implements View.OnClickListener
     private SongBerrialogika songberrialogika;
 
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SongBerriaFragment.
-     */
-    public static SongBerriaFragment newInstance(String param1, String param2) {
-        SongBerriaFragment fragment = new SongBerriaFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
 
     public SongBerriaFragment() {
         // Required empty public constructor
@@ -76,34 +51,21 @@ public class SongBerriaFragment extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        View v = inflater.inflate(R.layout.fragment_song_berria, container, false);
+        setContentView(R.layout.fragment_song_berria);
 
 
-        buttonSortu = (Button) v.findViewById(R.id.buttonKantuaSortu);
-        kantuaIzenaText = (EditText) v.findViewById(R.id.kantuIzena);
-        autoreaText = (EditText) v.findViewById(R.id.autorea);
-        youtubeText = (EditText) v.findViewById(R.id.youtube);
-        mp3Text = (EditText) v.findViewById(R.id.mp3);
-        textAukeratutakoAkordeak = (TextView) v.findViewById(R.id.textAukeratutakoAkordeak);
-        buttonAkordeakAukeratu = (Button) v.findViewById(R.id.buttonAkordeakAukeratu);
+        buttonSortu = (Button) findViewById(R.id.buttonKantuaSortu);
+        kantuaIzenaText = (EditText) findViewById(R.id.kantuIzena);
+        autoreaText = (EditText) findViewById(R.id.autorea);
+        youtubeText = (EditText) findViewById(R.id.youtube);
+        mp3Text = (EditText) findViewById(R.id.mp3);
+        textAukeratutakoAkordeak = (TextView) findViewById(R.id.textAukeratutakoAkordeak);
+        buttonAkordeakAukeratu = (Button) findViewById(R.id.buttonAkordeakAukeratu);
         buttonAkordeakAukeratu.setOnClickListener(this);
 
         buttonSortu.setOnClickListener(this);
-
-
-        return inflater.inflate(R.layout.fragment_song_berria, container, false);
     }
+
 
 
 
@@ -111,23 +73,26 @@ public class SongBerriaFragment extends Fragment implements View.OnClickListener
     @Override
     public void onClick(View view) {
 
+        Log.i("id", view.getId() +"");
+
         switch(view.getId()){
 
             case R.id.buttonAkordeakAukeratu:
 
                 //Se crea una lista de acordes y se muestra el dialog
 
-                ArrayList<String> akordeArraylist = songberrialogika.getSongBerriaLogika(getActivity().getApplicationContext()).lortuAkordeGuztiak();
+                ArrayList<String> akordeArraylist = songberrialogika.getSongBerriaLogika(getApplicationContext()).lortuAkordeGuztiak();
+                Log.i("akordeakArrayList", "luzeera: " + akordeArraylist.size());
                 String[] akordeakArray = new String[akordeArraylist.size()];
                 akordeakArray = akordeArraylist.toArray(akordeakArray);
 
-
+                Log.i("akordeak", akordeakArray.toString() + "; luzeera: " + akordeakArray.length);
                 //Dialog-a sortzen da
                 final CharSequence[] items = akordeakArray;
                 // arraylist to keep the selected items
                 final ArrayList seletedItems=new ArrayList();
 
-                AlertDialog dialog = new AlertDialog.Builder(getActivity())
+                AlertDialog dialog = new AlertDialog.Builder(this)
                         .setTitle("Aukeratu nahi dituzun Akordeak")
                         .setMultiChoiceItems(items, null, new DialogInterface.OnMultiChoiceClickListener() {
                             @Override
@@ -147,9 +112,9 @@ public class SongBerriaFragment extends Fragment implements View.OnClickListener
                                 //Aukeratutako akordeen label-a eguneratzen da
 
                                 String chords = "";
-                                Iterator<String> it = seletedItems.iterator();
+                                Iterator<Integer> it = seletedItems.iterator();
                                 while(it.hasNext()){
-                                    chords = chords + it.next() + ";";
+                                    chords = chords + items[it.next()] + ";";
 
                                 }
                                 textAukeratutakoAkordeak.setText(chords);
@@ -176,27 +141,28 @@ public class SongBerriaFragment extends Fragment implements View.OnClickListener
 
 
                 //Eremu guztiak badaude beteta, ikusi behar da ea kantua sortu daitekeen ala existitzen den, eta azkena ez bada, sortu egiten da
-                if(!youtube.isEmpty() && !mp3.isEmpty() && !kantuIzena.isEmpty() && !autoreIzena.isEmpty() && !akordeak.isEmpty()){
-                    boolean ondoSortuDa = songberrialogika.getSongBerriaLogika(getActivity().getApplicationContext()).abestiaSortu(kantuIzena, autoreIzena, youtube, mp3, akordeak);
+                if(!youtube.isEmpty() && !mp3.isEmpty() && !kantuIzena.isEmpty() && !autoreIzena.isEmpty() && !akordeak.equalsIgnoreCase("Acordes Seleccionados")){
+                    Log.i("txatxan", "you: " + youtube + "mp3: " + mp3 + "kantua: " + kantuIzena + "autorea: " + autoreIzena + "akordeak: " + akordeak);
+                    boolean ondoSortuDa = songberrialogika.getSongBerriaLogika(getApplicationContext()).abestiaSortu(kantuIzena, autoreIzena, youtube, mp3, akordeak);
 
                     //ez bada ondo sortu, abestia existitzen delako da, eta alert bat erakutsiko da
                     //bestela, ondo sortu dela adieraziko da, eta zerrendara bueltatuko da erabiltzailea
                     String mezua = "Kantu hori existitzen da; aukeratu ezazu beste bat";
                     if(ondoSortuDa){
                         mezua = "Kantu berria ondo sortu da!";
-                        Toast.makeText(getActivity().getApplicationContext(), mezua,
+                        Toast.makeText(this.getApplicationContext(), mezua,
                                 Toast.LENGTH_SHORT).show();
-                        //TODO: FRAGMENT HAU ITXI ETA SONGSACTIVITY() KARGATZEN DA
+                        finish();
 
                     }
                     else{
-                        Toast.makeText(getActivity().getApplicationContext(), mezua,
+                        Toast.makeText(this.getApplicationContext(), mezua,
                                 Toast.LENGTH_SHORT).show();
                     }
 
 
                 }else{
-                    Toast.makeText(getActivity().getApplicationContext(), "kaka",
+                    Toast.makeText(this.getApplicationContext(), "Bete ezazu eremu guztiak!",
                             Toast.LENGTH_SHORT).show();
                 }
 

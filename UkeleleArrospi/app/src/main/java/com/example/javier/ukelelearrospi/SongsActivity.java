@@ -13,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -66,7 +67,7 @@ public class SongsActivity extends Fragment implements TextWatcher, AdapterView.
         pendiente.setOnCheckedChangeListener(this);
         ikasia.setOnCheckedChangeListener(this);
 
-        v.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+        /*v.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 android.support.v4.app.FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
@@ -76,6 +77,16 @@ public class SongsActivity extends Fragment implements TextWatcher, AdapterView.
                         .commit();
             }
         });
+*/
+        v.findViewById(R.id.fab).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("context", "" + getActivity().getBaseContext());
+                Intent i = new Intent(getActivity().getBaseContext(), SongBerriaFragment.class);
+                startActivity(i);
+            }
+        });
+
 
         // Zerrenda
         RecyclerView recyclerView = ((RecyclerView) v.findViewById(R.id.recycler_view));

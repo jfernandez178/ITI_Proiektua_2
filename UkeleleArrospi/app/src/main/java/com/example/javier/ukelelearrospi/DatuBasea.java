@@ -50,14 +50,13 @@ public class DatuBasea extends SQLiteOpenHelper {
                 " kantaIzena TEXT PRIMARY KEY," +
                 " pathKanta TEXT NOT NULL," +
                 " pathYoutube TEXT NOT NULL," +
-                " zailtasunMaila INTEGER NOT NULL," +
+                " zailtasunMaila INTEGER," +
                 " egilea TEXT NOT NULL," +
                 " iraupena INTEGER);");
         Log.i(this.getClass().toString(), "KANTAINFO Taula sortuta");
 
         db.execSQL( "CREATE TABLE INFOAKORDE(" +
-                " akordeIzena TEXT PRIMARY KEY," +
-                " pathIrudia TEXT NOT NULL);");
+                " akordeIzena TEXT PRIMARY KEY);");
         Log.i(this.getClass().toString(), "AKORDEINFO Taula sortuta");
 
 
@@ -162,11 +161,17 @@ public class DatuBasea extends SQLiteOpenHelper {
             "Israel Kamakawiwo",
             "Lynyrd Skynyrd",
     };
+    String akordeak[] = {"Do", "Re", "Mi", "Fa", "Sol", "La", "Si", "Dom", "Rem", "Mim", "Fam", "Solm", "Lam", "Sim"};
+
 
 
     private void datuBaseanKantuakSartu(SQLiteDatabase db){
         for (int i=0; i < songs.length; i++){
             db.execSQL("INSERT INTO INFOKANTA VALUES ('"+songs[i]+"', '"+songsMP3[i]+"', '"+songsYoutube[i]+"', "+(i % 4)+", '"+authors[i]+"', 138)");
+        }
+
+        for(int i=0; i<akordeak.length; i++){
+            db.execSQL("INSERT INTO INFOAKORDE (akordeIzena) values ('" + akordeak[i] + "')");
         }
     }
 

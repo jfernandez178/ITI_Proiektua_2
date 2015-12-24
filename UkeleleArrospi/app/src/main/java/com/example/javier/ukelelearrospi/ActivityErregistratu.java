@@ -40,8 +40,8 @@ public class ActivityErregistratu extends AppCompatActivity implements View.OnCl
 
 
     public void onStop() {
-        Intent i = new Intent(getBaseContext(), Login.class);
-        startActivity(i);
+        //Intent i = new Intent(getBaseContext(), Login.class);
+        //startActivity(i);
         super.onStop();
     }
 
@@ -69,10 +69,11 @@ public class ActivityErregistratu extends AppCompatActivity implements View.OnCl
                                     Toast.LENGTH_SHORT).show();
 
                             //Pantaila ixten da eta Login-a bistaratzen da
+                            //Intent i = new Intent(getBaseContext(), Login.class);
+                            //startActivity(i);
                             finish();
 
-                            Intent i = new Intent(getBaseContext(), Login.class);
-                            startActivity(i);
+
                         }
                         else{
                             Toast.makeText(getApplicationContext(), "Erabiltzaile hori existitzen da",
