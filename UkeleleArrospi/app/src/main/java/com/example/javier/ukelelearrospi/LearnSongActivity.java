@@ -117,15 +117,24 @@ public class LearnSongActivity extends Fragment implements View.OnClickListener 
         baseOpenYoutube(mp3, mp3Berria);
     }
 
+
     private void baseOpenYoutube(WebView webView, String youtubeBerria){
         String BASE_URL_YOUTUBE = "https://www.youtube.com/embed/";
-        String loadUrl;
-        if (youtubeBerria != null && !youtubeBerria.isEmpty() && youtubeBerria.contains("=")){
-            loadUrl = BASE_URL_YOUTUBE + youtubeBerria.split("=")[1];
-            webView.setWebViewClient(new WebViewClient());
-            WebSettings webSettings = webView.getSettings();
-            webSettings.setJavaScriptEnabled(true);
-            webView.loadUrl(loadUrl);
+        String loadUrl = null;
+        if (youtubeBerria != null && !youtubeBerria.isEmpty()){
+            if (youtubeBerria.contains("youtube") && youtubeBerria.contains("=")){
+                loadUrl = BASE_URL_YOUTUBE + youtubeBerria.split("=")[1];
+            }else if(youtubeBerria.contains("youtu.be") && youtubeBerria.contains("/")){
+                String[] parts = youtubeBerria.split("/");
+                loadUrl = BASE_URL_YOUTUBE + parts[parts.length-1];
+            }
+            if (loadUrl != null){
+                webView.setWebViewClient(new WebViewClient());
+                WebSettings webSettings = webView.getSettings();
+                webSettings.setJavaScriptEnabled(true);
+                webView.loadUrl(loadUrl);
+            }
+
         }
     }
 
@@ -241,8 +250,5 @@ public class LearnSongActivity extends Fragment implements View.OnClickListener 
                 break;
 
         }
-
-
-
     }
 }
